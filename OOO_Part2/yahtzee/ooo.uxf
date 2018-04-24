@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>70</y>
+      <w>300</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+- username:String
+--
++ Player(username: String)
++ getusername(): String
++ setUsername(username: String): void
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>390</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>ui.Menu
+--
+--
++ showMenu():void
+- addPlayer(): void
+- playGame(): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>170</y>
+      <w>270</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+--
+_+ main(args: String[]): void_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>290</y>
+      <w>40</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>20.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>240</y>
+      <w>400</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>380.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+</diagram>
