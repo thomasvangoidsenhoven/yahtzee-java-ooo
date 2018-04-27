@@ -11,7 +11,7 @@ public class MainController {
         while(true)
         {
             TextInputDialog dialog = createNewDialog();
-            Optional<String> result = new TextInputDialog().showAndWait();
+            Optional<String> result = dialog.showAndWait();
             if(result.isPresent())
             {
                 //ok
