@@ -1,6 +1,8 @@
 # Compiled class file
 *.class
 
+/OOO_Part2/yahtzee/idea*
+
 # Log file
 *.log
 
