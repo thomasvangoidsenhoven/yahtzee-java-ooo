@@ -1,8 +1,10 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 
 public class PlayerGroup
@@ -26,4 +28,8 @@ public class PlayerGroup
         return players.get(username);
     }
 
+    public List<Player> getPlayers()
+    {
+        return new ArrayList<>(players.values());
+    }
 }

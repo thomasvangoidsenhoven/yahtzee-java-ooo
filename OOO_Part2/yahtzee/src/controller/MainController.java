@@ -13,7 +13,7 @@ public class MainController {
         GameSuite gameSuite = new GameSuite();
         loopNameRequests(gameSuite);
 
-        //for each player a new PlayerController
+        //create PlayerControllers
         createPlayerControllers(gameSuite);
         System.out.println("continues");
     }
@@ -37,6 +37,7 @@ public class MainController {
                 System.out.println(result.get());
             }else
             {
+                createPlayerControllers(gameSuite);
                 //dialogue got cancelled
                 break;
             }
@@ -52,6 +53,10 @@ public class MainController {
 
     private void createPlayerControllers(GameSuite suite)
     {
-
+        //for each Player a PlayerController
+        for(Player p : suite.getPlayers())
+        {
+            new PlayerController(p,suite);
+        }
     }
 }
