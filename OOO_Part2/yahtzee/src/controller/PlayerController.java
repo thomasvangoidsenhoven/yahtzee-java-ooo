@@ -14,7 +14,7 @@ public class PlayerController {
         this.player = player;
         this.suite = suite;
         screen = new GameScreen(this);
-        screen.startUp();
+
     }
 
 

@@ -14,16 +14,15 @@ public class GameScreen
     public GameScreen(PlayerController controller)
     {
         this.controller = controller;
+        startUp();
     }
 
-    public void startUp()
+    private void startUp()
     {
+        System.out.println("test");
         stage = new Stage();
         stage.setTitle("Yahtzee | " + controller.getPlayerName());
-        StackPane root = new StackPane();
-        Button btn = new Button("test");
-
-        root.getChildren().add(btn);
+        StackPane  root = new StackPane();
         stage.setScene(new Scene(root, 300, 250));
 
         stage.show();

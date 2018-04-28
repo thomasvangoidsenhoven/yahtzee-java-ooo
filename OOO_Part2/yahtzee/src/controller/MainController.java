@@ -12,10 +12,7 @@ public class MainController {
     {
         GameSuite gameSuite = new GameSuite();
         loopNameRequests(gameSuite);
-
-        //create PlayerControllers
         createPlayerControllers(gameSuite);
-        System.out.println("continues");
     }
 
 
@@ -26,10 +23,12 @@ public class MainController {
 
     private void loopNameRequests( GameSuite gameSuite )
     {
+
         while(true)
         {
             TextInputDialog dialog = createNewDialog();
             Optional<String> result = dialog.showAndWait();
+
             if(result.isPresent())
             {
                 //ok
@@ -37,7 +36,6 @@ public class MainController {
                 System.out.println(result.get());
             }else
             {
-                createPlayerControllers(gameSuite);
                 //dialogue got cancelled
                 break;
             }
