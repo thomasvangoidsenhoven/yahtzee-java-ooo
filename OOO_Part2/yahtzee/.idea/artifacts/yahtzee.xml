@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="yahtzee">
+    <output-path>$PROJECT_DIR$/out/artifacts/yahtzee</output-path>
+    <root id="root">
+      <element id="archive" name="yahtzee.jar">
+        <element id="module-output" name="yahtzee" />
+      </element>
+    </root>
+  </artifact>
+</component>

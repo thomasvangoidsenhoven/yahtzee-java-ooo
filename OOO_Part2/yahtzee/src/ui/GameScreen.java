@@ -19,7 +19,7 @@ public class GameScreen
 
     private void startUp()
     {
-        System.out.println("test");
+        //System.out.println("test");
         stage = new Stage();
         stage.setTitle("Yahtzee | " + controller.getPlayerName());
         StackPane  root = new StackPane();

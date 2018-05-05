@@ -1,8 +1,14 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player
 {
     private String username;
+
+    //maybe new collection type needed
+    private List<Category> catogories = new ArrayList<>();
 
     public Player(String username)
     {
@@ -18,4 +24,9 @@ public class Player
     {
         this.username = username;
     }
+
+    public List<Category> getCatogories() {
+        return catogories;
+    }
+
 }
