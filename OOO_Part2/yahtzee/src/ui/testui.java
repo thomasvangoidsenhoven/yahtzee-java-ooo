@@ -1,8 +1,7 @@
 package ui;
 
 import model.*;
-import model.categories.FourOfAKind;
-import model.categories.ThreeOfAKind;
+import model.categories.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +38,11 @@ public class testui {
         playerGroup.addPlayer(p);
 
         //MAKE  DICES TO USE WITH TESTPURPOSE CONSTRUCTOR
-        Dice d1 = new Dice(1);
-        Dice d2 = new Dice(6);
-        Dice d3 = new Dice(1);
-        Dice d4 = new Dice(1);
-        Dice d5 = new Dice(1);
+        Dice d1 = new Dice(5);
+        Dice d2 = new Dice(5);
+        Dice d3 = new Dice(5);
+        Dice d4 = new Dice(5);
+        Dice d5 = new Dice(5);
 
         //ADD DICES TO AN ARRAYLIST TO PAS THEM WITH TESPURPOSE CONSTRUCTOR OF DICE COLLECTION
         ArrayList<Dice> dices = new ArrayList<>();
@@ -61,15 +60,33 @@ public class testui {
         //MAKE NEW CATEGORIES
         Category TOAK = new ThreeOfAKind(diceCollection, playerGroup, "Arnold");
         Category FOAK = new FourOfAKind(diceCollection, playerGroup, "Arnold");
+        Category SS = new SmallStraight(diceCollection, playerGroup, "Arnold");
+        Category LS = new LargeStraight(diceCollection, playerGroup, "Arnold");
+        Category FH = new FullHouse(diceCollection, playerGroup, "Arnold");
+        Category C = new Chance(diceCollection, playerGroup, "Arnold");
+        Category Y = new Yatzee(diceCollection, playerGroup, "Arnold");
+        Category NC = new NumberCombos(diceCollection, playerGroup, "Arnold", 5);
 
         //CHECK PLAYERS CATEGORIES, ADD CATEGOTIES AND CHECK PLAYERS CATEGORY AGAIN
         System.out.println(p.getCatogories());
         TOAK.add();
         FOAK.add();
+        SS.add();
+        LS.add();
+        FH.add();
+        C.add();
+        Y.add();
+        NC.add();
         System.out.println(p.getCatogories());
 
         //CHECK IF CATEGORY CALCULATES CORRECTLY
-        System.out.println(TOAK.getScore());
-        System.out.println(FOAK.getScore());
+        System.out.println(TOAK.toString() + " SCORE IF POSSIBLE: " + TOAK.getScore());
+        System.out.println(FOAK.toString() + " SCORE IF POSSIBLE: " + FOAK.getScore());
+        System.out.println(SS.toString() + " SCORE IF POSSIBLE: " + SS.getScore());
+        System.out.println(LS.toString() + " SCORE IF POSSIBLE: " + LS.getScore());
+        System.out.println(FH.toString() + " SCORE IF POSSIBLE: " + FH.getScore());
+        System.out.println(C.toString() + " SCORE IF POSSIBLE: " + C.getScore());
+        System.out.println(Y.toString() + " SCORE IF POSSIBLE: " + Y.getScore());
+        System.out.println(NC.toString() + " SCORE IF POSSIBLE: " + NC.getScore());
     }
 }

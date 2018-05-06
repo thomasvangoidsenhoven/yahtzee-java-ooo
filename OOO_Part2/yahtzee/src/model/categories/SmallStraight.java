@@ -2,15 +2,14 @@ package model.categories;
 
 import model.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class FourOfAKind implements Category {
+public class SmallStraight implements Category {
     private DiceCollection diceCollection;
     private PlayerGroup playerGroup;
     private Player player;
 
-    public FourOfAKind(DiceCollection diceCollection, PlayerGroup playerGroup, String username){
+    public SmallStraight(DiceCollection diceCollection, PlayerGroup playerGroup, String username){
         setDiceCollection(diceCollection);
         setPlayerGroup(playerGroup);
         setPlayer(username);
@@ -51,66 +50,39 @@ public class FourOfAKind implements Category {
     @Override
     public int getScore() {
         List<Integer> values = new ArrayList<>();
-        int points =0;
+        Set<Integer> duplicates = new HashSet<>();
         for(Dice dice : diceCollection.getDices()) {
             values.add(dice.getEyes());
-            points += dice.getEyes();
         }
 
-        int ones = 0;
-        int twos = 0;
-        int threes = 0;
-        int fours = 0;
-        int fives = 0;
-        int sixes = 0;
+        //Makes it possible to remove al duplicates by adding the arraylist to a set which doesn't add duplicates
+        duplicates.addAll(values);
+        values.clear();
+        values.addAll(duplicates);
 
-        for(int val : values) {
-            if(val == 1){
-                ones ++;
-            }
-            else if(val == 2){
-                twos ++;
-            }
-            else if(val == 3){
-                threes ++;
-            }
-            else if(val == 4){
-                fours ++;
-            }
-            else if(val == 5){
-                fives ++;
-            }
-            else if(val == 5){
-                fives ++;
-            }
-            else if(val == 6){
-                sixes ++;
-            }
-        }
+        Collections.sort(values);
 
-        if( ones == 4 || ones == 5) {
-            return points;
+        //If the array now has less than 4 values, the loop will throw an index out of bounds exception. This prevents this from happening
+        values.add(10);
+        values.add(10);
+        values.add(10);
+        values.add(10);
+
+        int count = 1;
+        for(int i=0; i<4; i++) {
+            if(values.get(i) == values.get(i+1)-1) {
+                count++;
+                if(count==4){
+                    return 30;
+                }
+            }
+            else count = 1;
         }
-        else if(twos == 4|| twos == 5) {
-            return points;
-        }
-        else if(threes == 4 || threes == 5) {
-            return points;
-        }
-        else if(fours == 4 || fours == 5) {
-            return points;
-        }
-        else if(fives == 4 || fives == 5) {
-            return points;
-        }
-        else if(sixes == 4 || sixes == 5) {
-            return points;
-        }
-        else return 0;
+        return 0;
     }
 
     @Override
     public String toString() {
-        return "FOUR_OF_A_KIND";
+        return "SMALL_STRAIGHT";
     }
 }

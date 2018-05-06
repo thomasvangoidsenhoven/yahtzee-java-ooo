@@ -2,15 +2,14 @@ package model.categories;
 
 import model.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class FourOfAKind implements Category {
+public class LargeStraight implements Category {
     private DiceCollection diceCollection;
     private PlayerGroup playerGroup;
     private Player player;
 
-    public FourOfAKind(DiceCollection diceCollection, PlayerGroup playerGroup, String username){
+    public LargeStraight(DiceCollection diceCollection, PlayerGroup playerGroup, String username){
         setDiceCollection(diceCollection);
         setPlayerGroup(playerGroup);
         setPlayer(username);
@@ -51,66 +50,18 @@ public class FourOfAKind implements Category {
     @Override
     public int getScore() {
         List<Integer> values = new ArrayList<>();
-        int points =0;
+
         for(Dice dice : diceCollection.getDices()) {
             values.add(dice.getEyes());
-            points += dice.getEyes();
         }
-
-        int ones = 0;
-        int twos = 0;
-        int threes = 0;
-        int fours = 0;
-        int fives = 0;
-        int sixes = 0;
-
-        for(int val : values) {
-            if(val == 1){
-                ones ++;
-            }
-            else if(val == 2){
-                twos ++;
-            }
-            else if(val == 3){
-                threes ++;
-            }
-            else if(val == 4){
-                fours ++;
-            }
-            else if(val == 5){
-                fives ++;
-            }
-            else if(val == 5){
-                fives ++;
-            }
-            else if(val == 6){
-                sixes ++;
-            }
+        if(values.contains(2) && values.contains(3) && values.contains(4) && values.contains(5) && (values.contains(1) || values.contains(6))){
+            return 40;
         }
-
-        if( ones == 4 || ones == 5) {
-            return points;
-        }
-        else if(twos == 4|| twos == 5) {
-            return points;
-        }
-        else if(threes == 4 || threes == 5) {
-            return points;
-        }
-        else if(fours == 4 || fours == 5) {
-            return points;
-        }
-        else if(fives == 4 || fives == 5) {
-            return points;
-        }
-        else if(sixes == 4 || sixes == 5) {
-            return points;
-        }
-        else return 0;
+        return 0;
     }
 
     @Override
     public String toString() {
-        return "FOUR_OF_A_KIND";
+        return "LARGE_STRAIGHT";
     }
 }
