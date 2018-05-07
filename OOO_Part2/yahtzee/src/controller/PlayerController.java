@@ -1,11 +1,13 @@
 package controller;
 
 import model.GameSuite;
+
 import model.Player;
 import ui.GameScreen;
 
 public class PlayerController {
     private Player player;
+
     private GameSuite suite;
     private GameScreen screen;
 
@@ -21,4 +23,6 @@ public class PlayerController {
     public String getPlayerName() {
         return player.getUsername();
     }
+
+
 }

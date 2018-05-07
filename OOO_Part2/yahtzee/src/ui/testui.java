@@ -4,7 +4,6 @@ import model.*;
 import model.categories.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class testui {
     public static void main(String[] args ){

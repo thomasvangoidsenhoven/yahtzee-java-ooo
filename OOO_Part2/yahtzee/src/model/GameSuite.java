@@ -11,4 +11,6 @@ public class GameSuite
         playerGroup.addPlayer(new Player(username));
     }
     public List<Player> getPlayers(){ return  playerGroup.getPlayers(); }
+
+
 }
