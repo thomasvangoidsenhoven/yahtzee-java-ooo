@@ -11,6 +11,7 @@ public class PlayerController {
     private GameSuite suite;
     private GameScreen screen;
 
+
     public PlayerController(Player player, GameSuite suite)
     {
         this.player = player;
@@ -19,10 +20,19 @@ public class PlayerController {
 
     }
 
+    public Player getPlayer()
+    {
+        return player;
+    }
+
 
     public String getPlayerName() {
         return player.getUsername();
     }
 
+    public GameSuite getSuite()
+    {
+        return this.suite;
+    }
 
 }

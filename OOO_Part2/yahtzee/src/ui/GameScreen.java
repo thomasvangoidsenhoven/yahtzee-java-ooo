@@ -1,6 +1,8 @@
 package ui;
 
 import controller.PlayerController;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,16 +11,24 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Dice;
+import model.DiceCollection;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen
 {
     private PlayerController controller;
     private Stage stage;
+    private List<Label> labels = new ArrayList<>();
 
     public GameScreen(PlayerController controller)
     {
         this.controller = controller;
         startUp();
+
     }
 
     private void startUp()
@@ -48,14 +58,24 @@ public class GameScreen
 
     private void createGameView(Pane root)
     {
-
+        VBox gameContainer = new VBox();
         Button button = new Button("role dice!");
-        VBox gameView = new VBox();
+        button.setOnAction((event -> this.roll()));
+        HBox gameView = new HBox();
+
+        for(int i = 0; i < 5; i++)
+        {
+            Label label = new Label(Integer.toString((i)));
+            label.setPadding(new Insets(5,5,5,5));
+            labels.add(label);
+            gameView.getChildren().add(label);
+        }
+
+        gameContainer.setStyle("-fx-background-color: #FFDFC4");
+        gameContainer.getChildren().addAll(new Node[]{ button,gameView });
 
 
-
-        gameView.getChildren().add(button);
-        root.getChildren().add(gameView);
+        root.getChildren().add(gameContainer);
     }
 
     private void createPlayerText(Pane root)
@@ -65,5 +85,16 @@ public class GameScreen
         stackPane.getChildren().add(name);
         //
         root.getChildren().add(stackPane);
+    }
+
+    private void roll()
+    {
+        DiceCollection collection = controller.getSuite().getYahtzeeGame().roll(this.controller.getPlayerName());
+        int i = 0;
+        for(Dice dice : collection.getDices())
+        {
+            labels.get(i).setText(Integer.toString(dice.getEyes()));
+            i++;
+        }
     }
 }

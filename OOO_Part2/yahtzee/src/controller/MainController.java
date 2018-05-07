@@ -12,6 +12,7 @@ public class MainController {
     {
         GameSuite gameSuite = new GameSuite();
         loopNameRequests(gameSuite);
+        gameSuite.playYahtzee();
         createPlayerControllers(gameSuite);
     }
 
