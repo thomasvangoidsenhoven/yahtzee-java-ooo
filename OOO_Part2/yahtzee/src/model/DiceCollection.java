@@ -40,7 +40,7 @@ public class DiceCollection {
 
     public String toString(){
         String test ="";
-        int number = 1;
+
         for (Dice dice: diceList) {
            test += dice.toString();
         }
