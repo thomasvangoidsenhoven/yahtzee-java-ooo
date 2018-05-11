@@ -32,7 +32,6 @@ public class MainController {
             {
                 //ok
                 gameSuite.createPlayer(result.get());
-                System.out.println(result.get());
             }else
             {
                 //dialogue got cancelled

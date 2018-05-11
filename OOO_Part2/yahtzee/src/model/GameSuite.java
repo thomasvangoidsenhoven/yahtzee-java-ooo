@@ -1,5 +1,7 @@
 package model;
 
+import model.observer.ScreenObserver;
+
 import java.util.List;
 
 public class GameSuite
@@ -16,6 +18,13 @@ public class GameSuite
     public void playYahtzee()
     {
         yahtzeeGame = new YahtzeeGame(playerGroup);
+    }
+
+
+
+    public void registerYahtzeeObserver(ScreenObserver observer)
+    {
+        yahtzeeGame.registerObserver(observer);
     }
 
     public YahtzeeGame getYahtzeeGame() {

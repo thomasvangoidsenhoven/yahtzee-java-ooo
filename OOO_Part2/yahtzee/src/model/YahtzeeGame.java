@@ -1,8 +1,11 @@
 package model;
 
+import model.observer.ScreenObserver;
+import model.observer.YahtzeeSubject;
+
 import java.util.List;
 
-public class YahtzeeGame
+public class YahtzeeGame implements YahtzeeSubject
 {
     private PlayerGroup group;
     private DiceCup diceCup;
@@ -12,28 +15,39 @@ public class YahtzeeGame
     {
         this.group = group;
         diceCup = new DiceCup(5);
+
     }
 
 
-    public DiceCup roll()
+    public void roll()
     {
         diceCup.roll();
-        return  diceCup;
+        notifyObservers();
+
 
     }
 
-    public void lock(int dice){
-        diceCup.getDices().get(dice).setLock();
+    public void lock(int index){
+        diceCup.getDiceOnIndex(index).setLock();
+        notifyObservers();
     }
 
-
-    public void play(String playerId, Category category, Dice[] dice)
+    public boolean isLocked(int index)
     {
+        return diceCup.getDiceOnIndex(index).isLock();
+    }
 
+
+    //choose category
+    public void play(String playerId, CategoryTypes category, Dice[] dice)
+    {
+        addCategoryToPlayer(playerId,category);
+        notifyObservers();
     }
 
     public int getScore(String playerId, Category categoryType)
     {
+        //TODO
       return 0;
     }
 
@@ -41,9 +55,26 @@ public class YahtzeeGame
         return diceCup.getDices();
     }
 
-    public void addCategoryToPlayer(String username, CategoryTypes categoryTypes){
+    private void addCategoryToPlayer(String username, CategoryTypes categoryTypes){
         CategoryFactory categoryFactory = new CategoryFactory();
         group.addCategoryToPlayer(categoryFactory.createCategory(categoryTypes,diceCup),username);
     }
 
+    @Override
+    public void registerObserver(ScreenObserver observer) {
+        this.observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(ScreenObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(ScreenObserver observer : observers)
+        {
+            observer.update();
+        }
+    }
 }

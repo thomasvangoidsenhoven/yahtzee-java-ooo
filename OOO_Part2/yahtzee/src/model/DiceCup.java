@@ -34,6 +34,11 @@ public class DiceCup {
         }
     }
 
+    public Dice getDiceOnIndex(int index)
+    {
+        return this.getDices().get(index);
+    }
+
     public List<Dice> getDices() {
         return diceList;
     }

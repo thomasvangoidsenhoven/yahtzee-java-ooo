@@ -5,6 +5,7 @@ import model.DiceCup;
 import model.GameSuite;
 
 import model.Player;
+import model.observer.ScreenObserver;
 import ui.GameScreen;
 
 import java.util.List;
@@ -24,11 +25,20 @@ public class PlayerController {
 
     }
 
+    public void registerObserver(ScreenObserver observer)
+    {
+        suite.registerYahtzeeObserver(observer);
+    }
+
     public Player getPlayer()
     {
         return player;
     }
 
+    public boolean isDiceLocked(int index)
+    {
+        return suite.getYahtzeeGame().isLocked(index);
+    }
 
     public String getPlayerName() {
         return player.getUsername();

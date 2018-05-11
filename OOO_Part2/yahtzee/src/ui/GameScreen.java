@@ -13,11 +13,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Dice;
 import model.DiceCup;
+import model.YahtzeeGame;
+import model.observer.ScreenObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameScreen
+public class GameScreen implements ScreenObserver
 {
     private PlayerController controller;
     private Stage stage;
@@ -26,7 +28,9 @@ public class GameScreen
     public GameScreen(PlayerController controller)
     {
         this.controller = controller;
+        this.controller.registerObserver(this);
         startUp();
+
 
     }
 
@@ -68,6 +72,7 @@ public class GameScreen
             diceButton.setPadding(new Insets(5,5,5,5));
             final int current = i;
             diceButton.setOnAction(event -> lock(current));
+            diceButton.setStyle("-fx-background-color: green");
             buttons.add(diceButton);
             gameView.getChildren().add(diceButton);
         }
@@ -91,23 +96,33 @@ public class GameScreen
     private void roll()
     {
         controller.roll();
-        int i = 0;
-        for(Dice dice : controller.getDices())
-        {
-            buttons.get(i).setText(Integer.toString(dice.getEyes()));
-            i++;
-        }
+
     }
 
     private void lock(int index){
-        controller.getSuite().getYahtzeeGame().lock(index);
+        controller.lock(index);
+    }
+
+
+    //redraw dices
+    @Override
+    public void update() {
+        System.out.println("redraw");
         int i = 0;
         for(Dice dice : controller.getDices())
         {
             buttons.get(i).setText(Integer.toString(dice.getEyes()));
+            if(controller.isDiceLocked(i))
+            {
+                this.buttons.get(i).setStyle("-fx-background-color: red");
+            }
+            else
+            {
+                this.buttons.get(i).setStyle("-fx-background-color: green");
+            }
             i++;
         }
+
     }
-
-
 }
+
