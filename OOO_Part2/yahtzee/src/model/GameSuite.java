@@ -18,8 +18,6 @@ public class GameSuite
         yahtzeeGame = new YahtzeeGame(playerGroup);
     }
 
-
-
     public YahtzeeGame getYahtzeeGame() {
         return yahtzeeGame;
     }

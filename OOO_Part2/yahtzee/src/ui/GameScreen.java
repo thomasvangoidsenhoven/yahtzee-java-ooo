@@ -12,9 +12,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Dice;
-import model.DiceCollection;
+import model.DiceCup;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class GameScreen
 {
     private PlayerController controller;
     private Stage stage;
-    private List<Label> labels = new ArrayList<>();
+    private List<Button> buttons = new ArrayList<>();
 
     public GameScreen(PlayerController controller)
     {
@@ -65,10 +64,12 @@ public class GameScreen
 
         for(int i = 0; i < 5; i++)
         {
-            Label label = new Label(Integer.toString((i)));
-            label.setPadding(new Insets(5,5,5,5));
-            labels.add(label);
-            gameView.getChildren().add(label);
+            Button diceButton = new Button(Integer.toString((i)));
+            diceButton.setPadding(new Insets(5,5,5,5));
+            final int current = i;
+            diceButton.setOnAction(event -> lock(current));
+            buttons.add(diceButton);
+            gameView.getChildren().add(diceButton);
         }
 
         gameContainer.setStyle("-fx-background-color: #FFDFC4");
@@ -89,12 +90,24 @@ public class GameScreen
 
     private void roll()
     {
-        DiceCollection collection = controller.getSuite().getYahtzeeGame().roll(this.controller.getPlayerName());
+        controller.roll();
         int i = 0;
-        for(Dice dice : collection.getDices())
+        for(Dice dice : controller.getDices())
         {
-            labels.get(i).setText(Integer.toString(dice.getEyes()));
+            buttons.get(i).setText(Integer.toString(dice.getEyes()));
             i++;
         }
     }
+
+    private void lock(int index){
+        controller.getSuite().getYahtzeeGame().lock(index);
+        int i = 0;
+        for(Dice dice : controller.getDices())
+        {
+            buttons.get(i).setText(Integer.toString(dice.getEyes()));
+            i++;
+        }
+    }
+
+
 }

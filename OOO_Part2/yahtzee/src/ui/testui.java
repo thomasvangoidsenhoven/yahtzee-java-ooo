@@ -3,8 +3,6 @@ package ui;
 import model.*;
 import model.categories.*;
 
-import java.util.ArrayList;
-
 public class testui {
     public static void main(String[] args ){
 //DICE TEST
@@ -23,7 +21,7 @@ public class testui {
 
 //DICECOLLECTION TEST
 /*
-        DiceCollection d = new DiceCollection(5);
+        DiceCup d = new DiceCup(5);
         d.roll();
         System.out.println(d);
         d.getDices().get(3).setLock();
@@ -56,45 +54,46 @@ public class testui {
         dices.add(d3);
         dices.add(d4);
         dices.add(d5);
-        DiceCollection diceCollection = new DiceCollection(dices);
+        DiceCup diceCup = new DiceCup(dices);
 */
 
-        DiceCollection diceCollection = new DiceCollection(5);
-        diceCollection.roll();
+        DiceCup diceCup = new DiceCup(5);
+        diceCup.roll();
 
         //CHECK IF DICES ARE ADDED CORRECTLY
-        System.out.println(diceCollection);
+        System.out.println(diceCup);
 
         //MAKE NEW CATEGORIES
-        Category TOAK = new ThreeOfAKind(diceCollection, playerGroup, "Arnold");
-        Category FOAK = new FourOfAKind(diceCollection, playerGroup, "Arnold");
-        Category SS = new SmallStraight(diceCollection, playerGroup, "Arnold");
-        Category LS = new LargeStraight(diceCollection, playerGroup, "Arnold");
-        Category FH = new FullHouse(diceCollection, playerGroup, "Arnold");
-        Category C = new Chance(diceCollection, playerGroup, "Arnold");
-        Category Y = new Yatzee(diceCollection, playerGroup, "Arnold");
-        Category NC1 = new NumberCombos(diceCollection, playerGroup, "Arnold", 1);
-        Category NC2 = new NumberCombos(diceCollection, playerGroup, "Arnold", 2);
-        Category NC3 = new NumberCombos(diceCollection, playerGroup, "Arnold", 3);
-        Category NC4 = new NumberCombos(diceCollection, playerGroup, "Arnold", 4);
-        Category NC5 = new NumberCombos(diceCollection, playerGroup, "Arnold", 5);
-        Category NC6 = new NumberCombos(diceCollection, playerGroup, "Arnold", 6);
+        Category TOAK = new ThreeOfAKind(diceCup);
+        Category FOAK = new FourOfAKind(diceCup);
+        Category SS = new SmallStraight(diceCup);
+        Category LS = new LargeStraight(diceCup);
+        Category FH = new FullHouse(diceCup);
+        Category C = new Chance(diceCup);
+        Category Y = new Yatzee(diceCup);
+        Category NC1 = new NumberCombos(diceCup, 1);
+        Category NC2 = new NumberCombos(diceCup, 2);
+        Category NC3 = new NumberCombos(diceCup, 3);
+        Category NC4 = new NumberCombos(diceCup, 4);
+        Category NC5 = new NumberCombos(diceCup, 5);
+        Category NC6 = new NumberCombos(diceCup, 6);
 
         //CHECK PLAYERS CATEGORIES, ADD CATEGOTIES AND CHECK PLAYERS CATEGORY AGAIN
         System.out.println(p.getCatogories());
-        TOAK.add();
-        FOAK.add();
-        SS.add();
-        LS.add();
-        FH.add();
-        C.add();
-        Y.add();
-        NC1.add();
-        NC2.add();
-        NC3.add();
-        NC4.add();
-        NC5.add();
-        NC6.add();
+        playerGroup.addCategoryToPlayer(TOAK, "Arnold");
+        playerGroup.addCategoryToPlayer(FOAK, "Arnold");
+        playerGroup.addCategoryToPlayer(SS, "Arnold");
+        playerGroup.addCategoryToPlayer(LS, "Arnold");
+        playerGroup.addCategoryToPlayer(FH, "Arnold");
+        playerGroup.addCategoryToPlayer(C, "Arnold");
+        playerGroup.addCategoryToPlayer(Y, "Arnold");
+        playerGroup.addCategoryToPlayer(NC1, "Arnold");
+        playerGroup.addCategoryToPlayer(NC2, "Arnold");
+        playerGroup.addCategoryToPlayer(NC3, "Arnold");
+        playerGroup.addCategoryToPlayer(NC4, "Arnold");
+        playerGroup.addCategoryToPlayer(NC5, "Arnold");
+        playerGroup.addCategoryToPlayer(NC6, "Arnold");
+
         System.out.println(p.getCatogories());
 
         //CHECK IF CATEGORY CALCULATES CORRECTLY

@@ -7,7 +7,7 @@ public class Player
 {
     private String username;
 
-    //maybe new collection type needed
+    //TODO maybe new collection type needed
     private List<Category> catogories = new ArrayList<>();
 
     public Player(String username)
@@ -27,6 +27,10 @@ public class Player
 
     public List<Category> getCatogories() {
         return catogories;
+    }
+
+    public void addCategory(Category category){
+        catogories.add(category);
     }
 
 

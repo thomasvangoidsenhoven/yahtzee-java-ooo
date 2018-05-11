@@ -5,11 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class DiceCollection {
+public class DiceCup {
     private List<Dice> diceList;
 
     //yatzee uses 5 dices
-    public DiceCollection(int dices) {
+    public DiceCup(int dices) {
         diceList = new ArrayList<>();
         for (int i = 0; i < dices; i++) {
             diceList.add(new Dice());
@@ -17,7 +17,7 @@ public class DiceCollection {
     }
 
     //TESPURPOSE CONSTRUCTOR
-    public DiceCollection(List<Dice> dices) {
+    public DiceCup(List<Dice> dices) {
         diceList = dices;
     }
 

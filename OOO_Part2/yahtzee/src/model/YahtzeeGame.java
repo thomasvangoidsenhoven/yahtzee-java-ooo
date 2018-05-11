@@ -1,27 +1,29 @@
 package model;
 
+import java.util.List;
+
 public class YahtzeeGame
 {
     private PlayerGroup group;
-    private DiceCollection currentDices;
-    private DiceCollection setAside;
+    private DiceCup diceCup;
 
 
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
-        currentDices = new DiceCollection(5);
-        setAside = new DiceCollection(0);
+        diceCup = new DiceCup(5);
     }
 
 
-    public DiceCollection roll(String playerId)
+    public DiceCup roll()
     {
-        DiceCollection collection = new DiceCollection(5);
+        diceCup.roll();
+        return  diceCup;
 
-        collection.roll();
-        return  collection;
+    }
 
+    public void lock(int dice){
+        diceCup.getDices().get(dice).setLock();
     }
 
 
@@ -34,4 +36,14 @@ public class YahtzeeGame
     {
       return 0;
     }
+
+    public List<Dice> getDiceCup() {
+        return diceCup.getDices();
+    }
+
+    public void addCategoryToPlayer(String username, CategoryTypes categoryTypes){
+        CategoryFactory categoryFactory = new CategoryFactory();
+        group.addCategoryToPlayer(categoryFactory.createCategory(categoryTypes,diceCup),username);
+    }
+
 }

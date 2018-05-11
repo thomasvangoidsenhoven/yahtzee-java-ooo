@@ -1,9 +1,13 @@
 package controller;
 
+import model.Dice;
+import model.DiceCup;
 import model.GameSuite;
 
 import model.Player;
 import ui.GameScreen;
+
+import java.util.List;
 
 public class PlayerController {
     private Player player;
@@ -33,6 +37,18 @@ public class PlayerController {
     public GameSuite getSuite()
     {
         return this.suite;
+    }
+
+    public void roll(){
+        suite.getYahtzeeGame().roll();
+    }
+
+    public void lock(int dice){
+        suite.getYahtzeeGame().lock(dice);
+    }
+
+    public List<Dice> getDices(){
+        return suite.getYahtzeeGame().getDiceCup();
     }
 
 }

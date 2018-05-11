@@ -32,4 +32,8 @@ public class PlayerGroup
     {
         return new ArrayList<>(players.values());
     }
+
+    public void addCategoryToPlayer(Category category, String username){
+        getPlayer(username).addCategory(category);
+    }
 }
