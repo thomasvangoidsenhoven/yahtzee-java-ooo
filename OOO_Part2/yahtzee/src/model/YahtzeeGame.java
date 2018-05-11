@@ -19,12 +19,21 @@ public class YahtzeeGame implements YahtzeeSubject
     }
 
 
+
+    public Player getCurrentPlayer()
+    {
+        return group.getCurrentPlayer();
+    }
+
+    public Player goNextPlayer()
+    {
+        return group.goNextPlayer();
+    }
+
     public void roll()
     {
         diceCup.roll();
         notifyObservers();
-
-
     }
 
     public void lock(int index){
@@ -39,15 +48,17 @@ public class YahtzeeGame implements YahtzeeSubject
 
 
     //choose category
-    public void play(String playerId, CategoryTypes category, Dice[] dice)
+    public void play(String playerId, CategoryType category)
     {
+
         addCategoryToPlayer(playerId,category);
         notifyObservers();
     }
 
-    public int getScore(String playerId, Category categoryType)
+    public int getScore(String playerId, CategoryType categoryType)
     {
-        //TODO
+        group.getPlayer(playerId).getCategoryByType(categoryType).getScore();
+
       return 0;
     }
 
@@ -55,9 +66,9 @@ public class YahtzeeGame implements YahtzeeSubject
         return diceCup.getDices();
     }
 
-    private void addCategoryToPlayer(String username, CategoryTypes categoryTypes){
+    private void addCategoryToPlayer(String username, CategoryType categoryType){
         CategoryFactory categoryFactory = new CategoryFactory();
-        group.addCategoryToPlayer(categoryFactory.createCategory(categoryTypes,diceCup),username);
+        group.addCategoryToPlayer(categoryFactory.createCategory(categoryType,diceCup),username);
     }
 
     @Override

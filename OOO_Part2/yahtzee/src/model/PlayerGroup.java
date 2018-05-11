@@ -22,9 +22,14 @@ public class PlayerGroup
         }
     }
 
-    public Player getNextPlayer()
+    public Player getCurrentPlayer()
     {
-        Player player = queue.pop();
+        return queue.peek();
+    }
+
+    public Player goNextPlayer()
+    {
+        Player player = queue.removeLast();
         queue.push(player);
 
         return player;

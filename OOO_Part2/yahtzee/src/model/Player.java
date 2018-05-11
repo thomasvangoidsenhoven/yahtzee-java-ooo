@@ -1,14 +1,21 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Player
 {
     private String username;
 
     //TODO maybe new collection type needed
-    private List<Category> catogories = new ArrayList<>();
+    private Map<CategoryType,Category> catogories = new HashMap<>();
+
+    public Category getCategoryByType(CategoryType type)
+    {
+        return catogories.get(type);
+    }
 
     public Player(String username)
     {
@@ -26,11 +33,11 @@ public class Player
     }
 
     public List<Category> getCatogories() {
-        return catogories;
+        return new ArrayList<>(catogories.values());
     }
 
     public void addCategory(Category category){
-        catogories.add(category);
+        catogories.put(category.getCategoryType(),category);
     }
 
     @Override

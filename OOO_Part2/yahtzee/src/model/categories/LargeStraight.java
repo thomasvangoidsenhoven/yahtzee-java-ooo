@@ -6,6 +6,11 @@ import java.util.*;
 
 public class LargeStraight implements Category {
     private DiceCup diceCup;
+    private CategoryType type = CategoryType.LARGE_STRAIGHT;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
 
     public LargeStraight(DiceCup diceCup){
         setDiceCup(diceCup);
@@ -28,7 +33,7 @@ public class LargeStraight implements Category {
         for(Dice dice : diceCup.getDices()) {
             values.add(dice.getEyes());
         }
-        if(values.contains(2) && values.contains(3) && values.contains(4) && values.contains(5) && (values.contains(1) || values.contains(6))){
+        if(values.contains(2) && values.contains(3) && values.contains(4) && values.contains(5) && ((values.contains(1) || values.contains(6)) ) ){
             return 40;
         }
         return 0;

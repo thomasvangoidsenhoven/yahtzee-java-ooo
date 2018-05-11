@@ -7,6 +7,11 @@ import java.util.List;
 
 public class ThreeOfAKind implements Category {
     private DiceCup diceCup;
+    private CategoryType type = CategoryType.THREE_OF_A_KIND;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
 
     public ThreeOfAKind(DiceCup diceCup){
         setDiceCup(diceCup);

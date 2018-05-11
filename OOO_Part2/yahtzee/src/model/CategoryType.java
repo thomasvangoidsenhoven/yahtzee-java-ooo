@@ -1,6 +1,6 @@
 package model;
 
-public enum CategoryTypes {
+public enum CategoryType {
     ACES,
     TWOS,
     THREES,

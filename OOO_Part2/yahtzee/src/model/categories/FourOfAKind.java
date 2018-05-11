@@ -8,6 +8,12 @@ import java.util.List;
 public class FourOfAKind implements Category {
     private DiceCup diceCup;
 
+    private CategoryType type = CategoryType.FOUR_OF_A_KIND;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
+
     public FourOfAKind(DiceCup diceCup){
         setDiceCup(diceCup);
 

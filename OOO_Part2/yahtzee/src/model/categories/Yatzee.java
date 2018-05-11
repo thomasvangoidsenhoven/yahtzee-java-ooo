@@ -4,6 +4,11 @@ import model.*;
 
 public class Yatzee implements Category {
     private DiceCup diceCup;
+    private CategoryType type = CategoryType.YAHTZEE;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
     public Yatzee(DiceCup diceCup){
         setDiceCup(diceCup);
 

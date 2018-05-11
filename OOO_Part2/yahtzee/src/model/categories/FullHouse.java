@@ -7,6 +7,11 @@ import java.util.List;
 
 public class FullHouse implements Category {
     private DiceCup diceCup;
+    private CategoryType type = CategoryType.FULL_HOUSE;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
 
     public FullHouse(DiceCup diceCup){
         setDiceCup(diceCup);

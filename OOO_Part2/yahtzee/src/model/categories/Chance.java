@@ -4,11 +4,17 @@ import model.*;
 
 public class Chance implements Category {
     private DiceCup diceCup;
+    private CategoryType type = CategoryType.CHANCE;
 
+    public CategoryType getCategoryType() {
+        return type;
+    }
     public Chance(DiceCup diceCup){
         setDiceCup(diceCup);
 
     }
+
+
 
     @Override
     public void setDiceCup(DiceCup diceCup) {

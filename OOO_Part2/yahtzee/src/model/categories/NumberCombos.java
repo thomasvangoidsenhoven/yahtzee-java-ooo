@@ -5,11 +5,44 @@ import model.*;
 public class NumberCombos implements Category {
     private DiceCup diceCup;
     private int number;
+    private CategoryType type;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
 
     public NumberCombos(DiceCup diceCup, int number){
         setDiceCup(diceCup);
         this.number = number;
+        setCategory(number);
 
+    }
+
+    private void setCategory(int number)
+    {
+        switch (number)
+        {
+            default:
+                throw new IllegalArgumentException();
+            case 1:
+                type = CategoryType.ACES;
+                break;
+            case 2:
+                type = CategoryType.TWOS;
+                break;
+            case 3:
+                type = CategoryType.THREES;
+                break;
+            case 4:
+                type = CategoryType.FOURS;
+                break;
+            case 5:
+                type = CategoryType.FIVES;
+                break;
+            case 6:
+                type = CategoryType.SIXES;
+                break;
+        }
     }
 
     @Override

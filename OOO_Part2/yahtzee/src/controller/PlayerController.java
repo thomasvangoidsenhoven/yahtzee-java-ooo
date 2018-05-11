@@ -1,7 +1,7 @@
 package controller;
 
+import model.CategoryType;
 import model.Dice;
-import model.DiceCup;
 import model.GameSuite;
 
 import model.Player;
@@ -11,15 +11,15 @@ import ui.GameScreen;
 import java.util.List;
 
 public class PlayerController {
-    private Player player;
+    private Player yourPlayer;
 
     private GameSuite suite;
     private GameScreen screen;
 
 
-    public PlayerController(Player player, GameSuite suite)
+    public PlayerController(Player currentPlayer, GameSuite suite)
     {
-        this.player = player;
+        this.yourPlayer = currentPlayer;
         this.suite = suite;
         screen = new GameScreen(this);
 
@@ -30,9 +30,25 @@ public class PlayerController {
         suite.registerYahtzeeObserver(observer);
     }
 
-    public Player getPlayer()
+    public void chooseCategory(String playerId, String category)
     {
-        return player;
+        suite.getYahtzeeGame().play(playerId, CategoryType.valueOf(category.toUpperCase()));
+    }
+
+    //player who's currently playing
+    public Player getCurrentPlayer()
+    {
+        return suite.getYahtzeeGame().getCurrentPlayer();
+    }
+
+    public Player goNextPlayer()
+    {
+        return suite.getYahtzeeGame().goNextPlayer();
+    }
+
+    public Player getYourPlayer()
+    {
+        return yourPlayer;
     }
 
     public boolean isDiceLocked(int index)
@@ -41,7 +57,7 @@ public class PlayerController {
     }
 
     public String getPlayerName() {
-        return player.getUsername();
+        return yourPlayer.getUsername();
     }
 
     public GameSuite getSuite()

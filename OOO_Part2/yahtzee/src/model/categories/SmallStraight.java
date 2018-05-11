@@ -6,6 +6,11 @@ import java.util.*;
 
 public class SmallStraight implements Category {
     private DiceCup diceCup;
+    private CategoryType type = CategoryType.SMALL_STRAIGHT;
+
+    public CategoryType getCategoryType() {
+        return type;
+    }
 
     public SmallStraight(DiceCup diceCup){
         setDiceCup(diceCup);

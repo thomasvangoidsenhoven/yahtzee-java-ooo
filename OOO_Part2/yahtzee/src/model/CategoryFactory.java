@@ -14,7 +14,7 @@ public class CategoryFactory
     CHANCE*/
 
 
-    public Category createCategory(CategoryTypes categoryType, DiceCup diceCup)
+    public Category createCategory(CategoryType categoryType, DiceCup diceCup)
     {
 
         Category category = null;

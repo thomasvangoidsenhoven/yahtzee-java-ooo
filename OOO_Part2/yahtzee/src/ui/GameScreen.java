@@ -1,16 +1,17 @@
 package ui;
 
 import controller.PlayerController;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.CategoryType;
 import model.Dice;
 import model.DiceCup;
 import model.YahtzeeGame;
@@ -77,6 +78,8 @@ public class GameScreen implements ScreenObserver
             gameView.getChildren().add(diceButton);
         }
 
+        drawCategories(gameView);
+
         gameContainer.setStyle("-fx-background-color: #FFDFC4");
         gameContainer.getChildren().addAll(new Node[]{ button,gameView });
 
@@ -101,6 +104,14 @@ public class GameScreen implements ScreenObserver
 
     private void lock(int index){
         controller.lock(index);
+    }
+
+    private void drawCategories(Pane pane)
+    {
+        ComboBox menuButton = new ComboBox();
+        menuButton.setValue("Choose your category");
+        menuButton.setItems(FXCollections.observableArrayList(CategoryType.values()));
+        pane.getChildren().add(menuButton);
     }
 
 
