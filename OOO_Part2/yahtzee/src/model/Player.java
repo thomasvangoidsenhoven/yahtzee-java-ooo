@@ -33,6 +33,14 @@ public class Player
         catogories.add(category);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof  Player)
+        {
+            Player player = (Player) obj;
+            if(player.getUsername().equals(this.getUsername())) return true;
+        }
+        return false;
 
-
+    }
 }
