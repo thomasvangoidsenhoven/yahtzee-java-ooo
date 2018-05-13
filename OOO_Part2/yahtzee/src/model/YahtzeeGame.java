@@ -19,6 +19,12 @@ public class YahtzeeGame implements YahtzeeSubject
     }
 
 
+    public void resetDice()
+    {
+        diceCup.reset();
+        notifyObservers();
+    }
+
 
     public Player getCurrentPlayer()
     {
@@ -27,7 +33,10 @@ public class YahtzeeGame implements YahtzeeSubject
 
     public Player goNextPlayer()
     {
-        return group.goNextPlayer();
+        Player player = group.goNextPlayer();
+        notifyObservers();
+        return player;
+
     }
 
     public void roll()

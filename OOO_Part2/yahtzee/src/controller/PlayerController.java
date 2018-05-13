@@ -30,15 +30,20 @@ public class PlayerController {
         suite.registerYahtzeeObserver(observer);
     }
 
-    public void chooseCategory(String playerId, String category)
+    public void chooseCategory(String playerId, CategoryType category)
     {
-        suite.getYahtzeeGame().play(playerId, CategoryType.valueOf(category.toUpperCase()));
+        suite.getYahtzeeGame().play(playerId, category);
     }
 
     //player who's currently playing
     public Player getCurrentPlayer()
     {
         return suite.getYahtzeeGame().getCurrentPlayer();
+    }
+
+    public void resetDices()
+    {
+        suite.getYahtzeeGame().resetDice();
     }
 
     public Player goNextPlayer()

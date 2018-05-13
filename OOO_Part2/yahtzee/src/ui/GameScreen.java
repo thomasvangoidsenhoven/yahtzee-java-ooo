@@ -19,18 +19,24 @@ import model.observer.ScreenObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class GameScreen implements ScreenObserver
 {
     private PlayerController controller;
     private Stage stage;
+    private StackPane playerNamePane = new StackPane();
     private List<Button> buttons = new ArrayList<>();
+    private Label playerLabel = new Label("");
+    private ComboBox menuButton;
+    private Button endTurnButton;
 
     public GameScreen(PlayerController controller)
     {
         this.controller = controller;
         this.controller.registerObserver(this);
         startUp();
+
 
 
     }
@@ -44,7 +50,9 @@ public class GameScreen implements ScreenObserver
 
         createGameText(root);
         createGameView(root);
-        createPlayerText(root);
+        createPlayerText();
+        this.playerNamePane.getChildren().add(playerLabel);
+        root.getChildren().add(playerNamePane);
 
         stage.setScene(new Scene(root, 300, 250));
 
@@ -71,14 +79,24 @@ public class GameScreen implements ScreenObserver
         {
             Button diceButton = new Button(Integer.toString((i)));
             diceButton.setPadding(new Insets(5,5,5,5));
-            final int current = i;
-            diceButton.setOnAction(event -> lock(current));
+            if(areYouPlaying())
+            {
+                final int current = i;
+                diceButton.setOnAction(event -> lock(current));
+            }
             diceButton.setStyle("-fx-background-color: green");
             buttons.add(diceButton);
             gameView.getChildren().add(diceButton);
         }
 
-        drawCategories(gameView);
+
+        this.menuButton = new ComboBox();
+        menuButton.setItems(FXCollections.observableArrayList(CategoryType.values()));
+
+        endTurnButton = new Button("End Turn");
+        endTurnButton.setOnAction((event -> this.endTurn(menuButton)));
+        drawCategories();
+        gameView.getChildren().addAll(new Node[]{menuButton,endTurnButton});
 
         gameContainer.setStyle("-fx-background-color: #FFDFC4");
         gameContainer.getChildren().addAll(new Node[]{ button,gameView });
@@ -87,13 +105,14 @@ public class GameScreen implements ScreenObserver
         root.getChildren().add(gameContainer);
     }
 
-    private void createPlayerText(Pane root)
+    private void createPlayerText()
     {
-        StackPane stackPane = new StackPane();
-        Label name = new Label(controller.getPlayerName() + " now Playing");
-        stackPane.getChildren().add(name);
+
+
+        playerLabel.setText(controller.getCurrentPlayer().getUsername() + " now Playing");
+
         //
-        root.getChildren().add(stackPane);
+
     }
 
     private void roll()
@@ -106,19 +125,52 @@ public class GameScreen implements ScreenObserver
         controller.lock(index);
     }
 
-    private void drawCategories(Pane pane)
+    private void drawCategories()
     {
-        ComboBox menuButton = new ComboBox();
-        menuButton.setValue("Choose your category");
-        menuButton.setItems(FXCollections.observableArrayList(CategoryType.values()));
-        pane.getChildren().add(menuButton);
+
+        if(areYouPlaying())
+        {
+            menuButton.setVisible(true);
+            endTurnButton.setVisible(true);
+
+        }else
+            {
+                menuButton.setVisible(false);
+                endTurnButton.setVisible(false);
+            }
+
+
+
+    }
+
+    private void endTurn(ComboBox list)
+    {
+        System.out.println(list.getValue());
+        if(list.getValue() != null)
+        {
+            System.out.println("test");
+            controller.chooseCategory(controller.getPlayerName(),(CategoryType) list.getValue());
+            controller.resetDices();
+            controller.goNextPlayer();
+        }
+
+
+    }
+
+    private boolean areYouPlaying()
+    {
+        if(controller.getYourPlayer().equals(controller.getCurrentPlayer()))
+        {
+            return true;
+        }
+        return false;
     }
 
 
     //redraw dices
     @Override
     public void update() {
-        System.out.println("redraw");
+        System.out.println("redraw + currently playing: " + this.controller.getCurrentPlayer().getUsername());
         int i = 0;
         for(Dice dice : controller.getDices())
         {
@@ -133,6 +185,8 @@ public class GameScreen implements ScreenObserver
             }
             i++;
         }
+        this.createPlayerText();
+        this.drawCategories();
 
     }
 }
