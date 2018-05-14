@@ -9,14 +9,14 @@ public class YahtzeeGame implements YahtzeeSubject
 {
     private PlayerGroup group;
     private DiceCup diceCup;
-    private RollChance rollChance;
+    private DiceRoll diceRoll;
 
 
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
         diceCup = new DiceCup(5);
-        rollChance = new RollChance(4);
+        diceRoll = new DiceRoll(4);
 
 
 
@@ -48,7 +48,7 @@ public class YahtzeeGame implements YahtzeeSubject
     public void roll()
     {
         diceCup.roll();
-        rollChance.roll();
+        diceRoll.roll();
         notifyObservers();
     }
 
@@ -66,7 +66,7 @@ public class YahtzeeGame implements YahtzeeSubject
     //choose category
     public void play(String playerId, CategoryType category)
     {
-        rollChance.resetChances();
+        diceRoll.resetChances();
         addCategoryToPlayer(playerId,category);
         notifyObservers();
     }

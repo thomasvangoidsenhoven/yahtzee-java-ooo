@@ -1,11 +1,11 @@
 package model;
 
-//put dicecup in RollChance?
-public class RollChance {
+//put dicecup in DiceRoll?
+public class DiceRoll {
     private int amount = 0;
     private final int init;
 
-    public RollChance(int amount)
+    public DiceRoll(int amount)
     {
         init = amount;
         this.amount = amount;

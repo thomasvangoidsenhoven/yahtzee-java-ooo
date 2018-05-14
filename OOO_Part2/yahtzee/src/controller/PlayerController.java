@@ -26,6 +26,13 @@ public class PlayerController {
 
     }
 
+    //is het jou beurt?
+    public boolean areYouPlaying()
+    {
+        if(getCurrentPlayer().equals(yourPlayer)) return true;
+        return false;
+    }
+
     public void registerObserver(ScreenObserver observer)
     {
         suite.registerYahtzeeObserver(observer);

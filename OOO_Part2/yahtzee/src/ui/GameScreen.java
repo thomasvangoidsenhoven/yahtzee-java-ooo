@@ -73,7 +73,7 @@ public class GameScreen implements ScreenObserver
 
     private void drawRollButton()
     {
-        if (areYouPlaying())
+        if (controller.areYouPlaying())
         {
             rollButton.setVisible(true);
         }else
@@ -119,18 +119,12 @@ public class GameScreen implements ScreenObserver
 
     private void createPlayerText()
     {
-
-
         playerLabel.setText(controller.getCurrentPlayer().getUsername() + " now Playing");
-
-        //
-
     }
 
     private void roll()
     {
         controller.roll();
-
     }
 
     private void lock(int index){
@@ -140,7 +134,7 @@ public class GameScreen implements ScreenObserver
     private void drawCategories()
     {
 
-        if(areYouPlaying())
+        if(controller.areYouPlaying())
         {
             menuButton.setVisible(true);
             endTurnButton.setVisible(true);
@@ -169,15 +163,6 @@ public class GameScreen implements ScreenObserver
 
     }
 
-    //TODO move to playercontroller
-    private boolean areYouPlaying()
-    {
-        if(controller.getYourPlayer().equals(controller.getCurrentPlayer()))
-        {
-            return true;
-        }
-        return false;
-    }
 
 
     //redraw dices
