@@ -30,6 +30,7 @@ public class GameScreen implements ScreenObserver
     private Label playerLabel = new Label("");
     private ComboBox menuButton;
     private Button endTurnButton;
+    private Button rollButton = new Button("role dice!");
 
     public GameScreen(PlayerController controller)
     {
@@ -51,6 +52,8 @@ public class GameScreen implements ScreenObserver
         createGameText(root);
         createGameView(root);
         createPlayerText();
+
+        drawRollButton();
         this.playerNamePane.getChildren().add(playerLabel);
         root.getChildren().add(playerNamePane);
 
@@ -68,22 +71,29 @@ public class GameScreen implements ScreenObserver
         root.getChildren().add(stackPane);
     }
 
+    private void drawRollButton()
+    {
+        if (areYouPlaying())
+        {
+            rollButton.setVisible(true);
+        }else
+            {
+                rollButton.setVisible(false);
+            }
+
+    }
+
     private void createGameView(Pane root)
     {
         VBox gameContainer = new VBox();
-        Button button = new Button("role dice!");
-        button.setOnAction((event -> this.roll()));
+        rollButton.setOnAction((event -> this.roll()));
         HBox gameView = new HBox();
 
         for(int i = 0; i < 5; i++)
         {
             Button diceButton = new Button(Integer.toString((i)));
             diceButton.setPadding(new Insets(5,5,5,5));
-            if(areYouPlaying())
-            {
-                final int current = i;
-                diceButton.setOnAction(event -> lock(current));
-            }
+
             diceButton.setStyle("-fx-background-color: green");
             buttons.add(diceButton);
             gameView.getChildren().add(diceButton);
@@ -99,11 +109,13 @@ public class GameScreen implements ScreenObserver
         gameView.getChildren().addAll(new Node[]{menuButton,endTurnButton});
 
         gameContainer.setStyle("-fx-background-color: #FFDFC4");
-        gameContainer.getChildren().addAll(new Node[]{ button,gameView });
+        gameContainer.getChildren().addAll(new Node[]{ rollButton,gameView });
 
 
         root.getChildren().add(gameContainer);
     }
+
+
 
     private void createPlayerText()
     {
@@ -148,7 +160,7 @@ public class GameScreen implements ScreenObserver
         System.out.println(list.getValue());
         if(list.getValue() != null)
         {
-            System.out.println("test");
+            System.out.println("-- END TURN --");
             controller.chooseCategory(controller.getPlayerName(),(CategoryType) list.getValue());
             controller.resetDices();
             controller.goNextPlayer();
@@ -157,6 +169,7 @@ public class GameScreen implements ScreenObserver
 
     }
 
+    //TODO move to playercontroller
     private boolean areYouPlaying()
     {
         if(controller.getYourPlayer().equals(controller.getCurrentPlayer()))
@@ -187,6 +200,7 @@ public class GameScreen implements ScreenObserver
         }
         this.createPlayerText();
         this.drawCategories();
+        this.drawRollButton();
 
     }
 }

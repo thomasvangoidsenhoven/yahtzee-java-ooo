@@ -9,12 +9,16 @@ public class YahtzeeGame implements YahtzeeSubject
 {
     private PlayerGroup group;
     private DiceCup diceCup;
+    private RollChance rollChance;
 
 
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
         diceCup = new DiceCup(5);
+        rollChance = new RollChance(4);
+
+
 
     }
 
@@ -22,7 +26,7 @@ public class YahtzeeGame implements YahtzeeSubject
     public void resetDice()
     {
         diceCup.reset();
-        notifyObservers();
+
     }
 
 
@@ -34,6 +38,8 @@ public class YahtzeeGame implements YahtzeeSubject
     public Player goNextPlayer()
     {
         Player player = group.goNextPlayer();
+        resetDice();
+        roll();
         notifyObservers();
         return player;
 
@@ -42,6 +48,7 @@ public class YahtzeeGame implements YahtzeeSubject
     public void roll()
     {
         diceCup.roll();
+        rollChance.roll();
         notifyObservers();
     }
 
@@ -59,16 +66,14 @@ public class YahtzeeGame implements YahtzeeSubject
     //choose category
     public void play(String playerId, CategoryType category)
     {
-
+        rollChance.resetChances();
         addCategoryToPlayer(playerId,category);
         notifyObservers();
     }
 
     public int getScore(String playerId, CategoryType categoryType)
     {
-        group.getPlayer(playerId).getCategoryByType(categoryType).getScore();
-
-      return 0;
+        return group.getPlayer(playerId).getCategoryByType(categoryType).getScore();
     }
 
     public List<Dice> getDiceCup() {

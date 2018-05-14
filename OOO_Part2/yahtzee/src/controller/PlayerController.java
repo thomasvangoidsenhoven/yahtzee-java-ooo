@@ -23,6 +23,7 @@ public class PlayerController {
         this.suite = suite;
         screen = new GameScreen(this);
 
+
     }
 
     public void registerObserver(ScreenObserver observer)
