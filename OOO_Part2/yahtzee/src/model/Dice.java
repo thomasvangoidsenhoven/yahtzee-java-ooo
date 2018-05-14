@@ -16,13 +16,13 @@ public class Dice {
     }
 
     //default getter
-    public boolean isLock() {
+    public boolean isLocked() {
         return lock;
     }
 
     //if called check for boolean and set the opposite
     public void setLock() {
-        if (isLock()) {
+        if (isLocked()) {
             this.lock = false;
         } else{
             this.lock = true;
@@ -30,7 +30,7 @@ public class Dice {
     }
 
     public void roll(){
-        if(!isLock()) {
+        if(!isLocked()) {
             Random r = new Random();
             this.eyes = r.nextInt(6) + 1;
         } else {
@@ -48,6 +48,6 @@ public class Dice {
 
     @Override
     public String toString() {
-        return "Dice: " + getEyes() + " - State: " + (isLock() == true ? "Locked" : "Unlocked") + "\n";
+        return "Dice: " + getEyes() + " - State: " + (isLocked() == true ? "Locked" : "Unlocked") + "\n";
     }
 }

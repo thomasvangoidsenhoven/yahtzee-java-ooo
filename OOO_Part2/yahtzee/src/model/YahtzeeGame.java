@@ -8,24 +8,19 @@ import java.util.List;
 public class YahtzeeGame implements YahtzeeSubject
 {
     private PlayerGroup group;
-    private DiceCup diceCup;
     private DiceRoll diceRoll;
 
 
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
-        diceCup = new DiceCup(5);
-        diceRoll = new DiceRoll(4);
-
-
-
+        diceRoll = new DiceRoll(4,5);
     }
 
 
     public void resetDice()
     {
-        diceCup.reset();
+        diceRoll.resetDice();
 
     }
 
@@ -47,19 +42,18 @@ public class YahtzeeGame implements YahtzeeSubject
 
     public void roll()
     {
-        diceCup.roll();
         diceRoll.roll();
         notifyObservers();
     }
 
     public void lock(int index){
-        diceCup.getDiceOnIndex(index).setLock();
+        diceRoll.lockDiceOnIndex(index);
         notifyObservers();
     }
 
     public boolean isLocked(int index)
     {
-        return diceCup.getDiceOnIndex(index).isLock();
+        return diceRoll.isDiceLockedOnIndex(index);
     }
 
 
@@ -73,16 +67,19 @@ public class YahtzeeGame implements YahtzeeSubject
 
     public int getScore(String playerId, CategoryType categoryType)
     {
+        //TODO Principle of Least Knowledge
         return group.getPlayer(playerId).getCategoryByType(categoryType).getScore();
     }
 
     public List<Dice> getDiceCup() {
-        return diceCup.getDices();
+        return getDiceCup();
     }
 
     private void addCategoryToPlayer(String username, CategoryType categoryType){
         CategoryFactory categoryFactory = new CategoryFactory();
-        group.addCategoryToPlayer(categoryFactory.createCategory(categoryType,diceCup),username);
+        //TODO should category know the DiceCup object or just a list of dices?
+        Category category = categoryFactory.createCategory(categoryType, diceRoll.getDiceCup());
+        group.addCategoryToPlayer(category,username);
     }
 
     @Override
