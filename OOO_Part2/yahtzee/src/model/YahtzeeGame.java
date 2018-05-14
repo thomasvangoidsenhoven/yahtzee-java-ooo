@@ -72,7 +72,7 @@ public class YahtzeeGame implements YahtzeeSubject
     }
 
     public List<Dice> getDiceCup() {
-        return getDiceCup();
+        return diceRoll.getDiceCupAsList();
     }
 
     private void addCategoryToPlayer(String username, CategoryType categoryType){
