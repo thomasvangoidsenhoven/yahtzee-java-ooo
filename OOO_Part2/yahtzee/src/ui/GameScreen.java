@@ -93,7 +93,6 @@ public class GameScreen implements ScreenObserver
         {
             Button diceButton = new Button(Integer.toString((i)));
             diceButton.setPadding(new Insets(5,5,5,5));
-
             diceButton.setStyle("-fx-background-color: green");
             buttons.add(diceButton);
             gameView.getChildren().add(diceButton);
@@ -170,9 +169,19 @@ public class GameScreen implements ScreenObserver
     public void update() {
         System.out.println("redraw + currently playing: " + this.controller.getCurrentPlayer().getUsername());
         int i = 0;
+        //create helper methods
         for(Dice dice : controller.getDices())
         {
             buttons.get(i).setText(Integer.toString(dice.getEyes()));
+            if(controller.areYouPlaying())
+            {
+                final int index = i;
+                buttons.get(i).setOnAction((event -> this.lock(index)));
+            }
+            else
+            {
+                buttons.get(i).setOnAction(event -> {});
+            }
             if(controller.isDiceLocked(i))
             {
                 this.buttons.get(i).setStyle("-fx-background-color: red");
