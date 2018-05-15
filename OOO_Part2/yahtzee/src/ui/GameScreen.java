@@ -28,6 +28,7 @@ public class GameScreen implements ScreenObserver
     private StackPane playerNamePane = new StackPane();
     private List<Button> buttons = new ArrayList<>();
     private Label playerLabel = new Label("");
+    private Label playerScore = new Label("");
     private ComboBox menuButton;
     private Button endTurnButton;
     private Button rollButton = new Button("role dice!");
@@ -56,6 +57,10 @@ public class GameScreen implements ScreenObserver
         drawRollButton();
         this.playerNamePane.getChildren().add(playerLabel);
         root.getChildren().add(playerNamePane);
+        HBox rootScore = new HBox();
+        rootScore.getChildren().add(this.playerScore);
+        root.getChildren().add(rootScore);
+
 
         stage.setScene(new Scene(root, 300, 250));
 
@@ -162,6 +167,14 @@ public class GameScreen implements ScreenObserver
 
     }
 
+    private void displayScores(){
+        String result = "";
+        for (String s: controller.getYourPlayer().getScoresAndCategories()) {
+            result += s +"\n";
+        }
+        playerScore.setText(result);
+    }
+
 
 
     //redraw dices
@@ -195,6 +208,7 @@ public class GameScreen implements ScreenObserver
         this.createPlayerText();
         this.drawCategories();
         this.drawRollButton();
+        this.displayScores();
 
     }
 }
