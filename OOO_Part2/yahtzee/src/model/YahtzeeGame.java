@@ -14,7 +14,7 @@ public class YahtzeeGame implements YahtzeeSubject
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
-        diceRoll = new DiceRoll(4,5);
+        diceRoll = new DiceRoll(3,5);
     }
 
 
@@ -34,7 +34,7 @@ public class YahtzeeGame implements YahtzeeSubject
     {
         Player player = group.goNextPlayer();
         resetDice();
-        roll();
+        //roll();
         notifyObservers();
         return player;
 
@@ -62,6 +62,7 @@ public class YahtzeeGame implements YahtzeeSubject
     {
         diceRoll.resetChances();
         addCategoryToPlayer(playerId,category);
+        System.out.println(group.getPlayer(playerId).getUsername() + " has categories: " + group.getPlayer(playerId).getScoresAndCategories());
         notifyObservers();
     }
 

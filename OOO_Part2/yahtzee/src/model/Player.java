@@ -36,6 +36,14 @@ public class Player
         return new ArrayList<>(catogories.values());
     }
 
+    public List<String> getScoresAndCategories(){
+        List<String> test = new ArrayList<>();
+        for (Category c: getCatogories()) {
+            test.add(c.toString() +": " + c.getScore());
+        }
+        return test;
+    }
+
     public void addCategory(Category category){
         catogories.put(category.getCategoryType(),category);
     }

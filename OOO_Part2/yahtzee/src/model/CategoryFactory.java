@@ -43,7 +43,7 @@ public class CategoryFactory
             case "CHANCE":
                 category = new Chance(diceCup);
                 break;
-            case "ONES":
+            case "ACES":
                 category = new NumberCombos(diceCup,1);
                 break;
             case "TWOS":
