@@ -97,19 +97,19 @@ public class testui {
         System.out.println(p.getCatogories());
 
         //CHECK IF CATEGORY CALCULATES CORRECTLY
-        System.out.println(TOAK.toString() + " SCORE IF POSSIBLE: " + TOAK.getScore());
-        System.out.println(FOAK.toString() + " SCORE IF POSSIBLE: " + FOAK.getScore());
-        System.out.println(SS.toString() + " SCORE IF POSSIBLE: " + SS.getScore());
-        System.out.println(LS.toString() + " SCORE IF POSSIBLE: " + LS.getScore());
-        System.out.println(FH.toString() + " SCORE IF POSSIBLE: " + FH.getScore());
-        System.out.println(C.toString() + " SCORE IF POSSIBLE: " + C.getScore());
-        System.out.println(Y.toString() + " SCORE IF POSSIBLE: " + Y.getScore());
-        System.out.println(NC1.toString() + " SCORE IF POSSIBLE: " + NC1.getScore());
-        System.out.println(NC2.toString() + " SCORE IF POSSIBLE: " + NC2.getScore());
-        System.out.println(NC3.toString() + " SCORE IF POSSIBLE: " + NC3.getScore());
-        System.out.println(NC4.toString() + " SCORE IF POSSIBLE: " + NC4.getScore());
-        System.out.println(NC5.toString() + " SCORE IF POSSIBLE: " + NC5.getScore());
-        System.out.println(NC6.toString() + " SCORE IF POSSIBLE: " + NC6.getScore());
+        System.out.println(TOAK.toString() + " SCORE IF POSSIBLE: " + TOAK.berekenScore());
+        System.out.println(FOAK.toString() + " SCORE IF POSSIBLE: " + FOAK.berekenScore());
+        System.out.println(SS.toString() + " SCORE IF POSSIBLE: " + SS.berekenScore());
+        System.out.println(LS.toString() + " SCORE IF POSSIBLE: " + LS.berekenScore());
+        System.out.println(FH.toString() + " SCORE IF POSSIBLE: " + FH.berekenScore());
+        System.out.println(C.toString() + " SCORE IF POSSIBLE: " + C.berekenScore());
+        System.out.println(Y.toString() + " SCORE IF POSSIBLE: " + Y.berekenScore());
+        System.out.println(NC1.toString() + " SCORE IF POSSIBLE: " + NC1.berekenScore());
+        System.out.println(NC2.toString() + " SCORE IF POSSIBLE: " + NC2.berekenScore());
+        System.out.println(NC3.toString() + " SCORE IF POSSIBLE: " + NC3.berekenScore());
+        System.out.println(NC4.toString() + " SCORE IF POSSIBLE: " + NC4.berekenScore());
+        System.out.println(NC5.toString() + " SCORE IF POSSIBLE: " + NC5.berekenScore());
+        System.out.println(NC6.toString() + " SCORE IF POSSIBLE: " + NC6.berekenScore());
 
     }
 }

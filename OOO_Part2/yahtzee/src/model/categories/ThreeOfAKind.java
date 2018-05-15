@@ -8,6 +8,17 @@ import java.util.List;
 public class ThreeOfAKind implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.THREE_OF_A_KIND;
+    private int score;
+    @Override
+    public void setScore() {
+        this.score = berekenScore();
+    }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
+
 
     public CategoryType getCategoryType() {
         return type;
@@ -27,7 +38,7 @@ public class ThreeOfAKind implements Category {
     }
 
     @Override
-    public int getScore() {
+    public int berekenScore() {
         List<Integer> values = new ArrayList<>();
         int points =0;
         for(Dice dice : diceCup.getDices()) {

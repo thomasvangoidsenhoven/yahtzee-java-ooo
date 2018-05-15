@@ -1,7 +1,9 @@
 package model;
 
 public interface Category {
-    void setDiceCup(DiceCup diceCup);
+    void setScore();
     int getScore();
+    void setDiceCup(DiceCup diceCup);
+    int berekenScore();
     CategoryType getCategoryType();
 }

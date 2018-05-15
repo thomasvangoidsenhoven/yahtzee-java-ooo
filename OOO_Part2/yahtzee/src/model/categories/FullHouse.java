@@ -8,7 +8,16 @@ import java.util.List;
 public class FullHouse implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.FULL_HOUSE;
+    private int score;
+    @Override
+    public void setScore() {
+        this.score = berekenScore();
+    }
 
+    @Override
+    public int getScore() {
+        return score;
+    }
     public CategoryType getCategoryType() {
         return type;
     }
@@ -28,7 +37,7 @@ public class FullHouse implements Category {
     }
 
     @Override
-    public int getScore() {
+    public int berekenScore() {
         List<Integer> values = new ArrayList<>();
 
         for(Dice dice : diceCup.getDices()) {

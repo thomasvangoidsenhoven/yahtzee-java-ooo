@@ -7,6 +7,11 @@ import java.util.*;
 public class SmallStraight implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.SMALL_STRAIGHT;
+    private int score;
+    @Override
+    public void setScore() {
+        this.score = berekenScore();
+    }
 
     public CategoryType getCategoryType() {
         return type;
@@ -28,6 +33,12 @@ public class SmallStraight implements Category {
 
     @Override
     public int getScore() {
+        return score;
+    }
+
+
+    @Override
+    public int berekenScore() {
         List<Integer> values = new ArrayList<>();
         Set<Integer> duplicates = new HashSet<>();
         for(Dice dice : diceCup.getDices()) {

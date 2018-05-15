@@ -6,6 +6,17 @@ public class NumberCombos implements Category {
     private DiceCup diceCup;
     private int number;
     private CategoryType type;
+    private int score;
+    //TODO REFACTOR CUZ BIG ASS PROBLEM HERE
+    @Override
+    public void setScore() {
+        this.score = berekenScore();
+    }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
 
     public CategoryType getCategoryType() {
         return type;
@@ -56,7 +67,7 @@ public class NumberCombos implements Category {
 
 
     @Override
-    public int getScore() {
+    public int berekenScore() {
         int result = 0;
         for(Dice dice : diceCup.getDices()) {
             if(dice.getEyes() == this.number){

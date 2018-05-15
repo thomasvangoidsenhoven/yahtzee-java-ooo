@@ -69,7 +69,7 @@ public class YahtzeeGame implements YahtzeeSubject
     public int getScore(String playerId, CategoryType categoryType)
     {
         //TODO Principle of Least Knowledge
-        return group.getPlayer(playerId).getCategoryByType(categoryType).getScore();
+        return group.getPlayer(playerId).getCategoryByType(categoryType).berekenScore();
     }
 
     public List<Dice> getDiceCup() {
@@ -80,6 +80,7 @@ public class YahtzeeGame implements YahtzeeSubject
         CategoryFactory categoryFactory = new CategoryFactory();
         //TODO should category know the DiceCup object or just a list of dices?
         Category category = categoryFactory.createCategory(categoryType, diceRoll.getDiceCup());
+        category.setScore();
         group.addCategoryToPlayer(category,username);
     }
 
