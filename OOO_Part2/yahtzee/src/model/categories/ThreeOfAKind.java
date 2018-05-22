@@ -97,6 +97,6 @@ public class ThreeOfAKind implements Category {
 
     @Override
     public String toString() {
-        return "THREE_OF_A_KIND";
+        return "Three of a kind";
     }
 }

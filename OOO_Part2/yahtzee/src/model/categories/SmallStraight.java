@@ -69,6 +69,6 @@ public class SmallStraight implements Category {
 
     @Override
     public String toString() {
-        return "SMALL_STRAIGHT";
+        return "Small Straight";
     }
 }

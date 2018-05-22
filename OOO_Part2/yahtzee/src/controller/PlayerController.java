@@ -7,6 +7,7 @@ import model.GameSuite;
 import model.Player;
 import model.observer.ScreenObserver;
 import ui.GameScreen;
+import ui.ScoreboardScreen;
 
 import java.util.List;
 
@@ -15,7 +16,6 @@ public class PlayerController {
 
     private GameSuite suite;
     private GameScreen screen;
-
 
     public PlayerController(Player currentPlayer, GameSuite suite)
     {
@@ -98,6 +98,10 @@ public class PlayerController {
 
     public List<Dice> getDices(){
         return suite.getYahtzeeGame().getDiceCup();
+    }
+
+    public void createScoreboard(){
+
     }
 
 }

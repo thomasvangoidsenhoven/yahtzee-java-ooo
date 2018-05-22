@@ -74,6 +74,27 @@ public class NumberCombos implements Category {
 
     @Override
     public String toString() {
-        return "COMBO_FOR_NUMBER_"+this.number;
+        String toSring = "";
+        switch (this.number) {
+            case 1:
+                toSring = "Ones";
+                break;
+            case 2:
+                toSring = "Twos";
+                break;
+            case 3:
+                toSring = "Threes";
+                break;
+            case 4:
+                toSring = "Fours";
+                break;
+            case 5:
+                toSring = "Fives";
+                break;
+            case 6:
+                toSring = "Sixes";
+                break;
+        }
+        return toSring;
     }
 }

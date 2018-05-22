@@ -67,6 +67,6 @@ public class FullHouse implements Category {
 
     @Override
     public String toString() {
-        return "FULL_HOUSE";
+        return "Full House";
     }
 }

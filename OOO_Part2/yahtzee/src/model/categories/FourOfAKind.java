@@ -98,6 +98,6 @@ public class FourOfAKind implements Category {
 
     @Override
     public String toString() {
-        return "FOUR_OF_A_KIND";
+        return "Four of a kind";
     }
 }

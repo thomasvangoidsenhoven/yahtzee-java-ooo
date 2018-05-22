@@ -46,6 +46,6 @@ public class LargeStraight implements Category {
 
     @Override
     public String toString() {
-        return "LARGE_STRAIGHT";
+        return "Large Straight";
     }
 }

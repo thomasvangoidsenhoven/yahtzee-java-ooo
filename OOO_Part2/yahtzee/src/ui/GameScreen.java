@@ -44,7 +44,6 @@ public class GameScreen implements ScreenObserver
         this.controller.registerObserver(this);
         startUp();
         this.playMusic("startup");
-
     }
 
     private void startUp()
@@ -64,7 +63,6 @@ public class GameScreen implements ScreenObserver
         HBox rootScore = new HBox();
         rootScore.getChildren().add(this.playerScore);
         root.getChildren().add(rootScore);
-
 
         stage.setScene(new Scene(root, 300, 250));
 
@@ -166,8 +164,10 @@ public class GameScreen implements ScreenObserver
             {
                 controller.chooseCategory(controller.getPlayerName(),(CategoryType) list.getValue());
                 System.out.println("-- END TURN --");
-                controller.resetDices();
-                controller.goNextPlayer();
+                if(!controller.getSuite().getYahtzeeGame().isGameOver()) {
+                    controller.resetDices();
+                    controller.goNextPlayer();
+                }
             }catch (IllegalStateException e)
             {
                 JOptionPane.showMessageDialog(null,"category is already used");
@@ -191,12 +191,12 @@ public class GameScreen implements ScreenObserver
     {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setContentText("The Winner IS: " + controller.getWinner().getUsername() + "\n WITH " + this.controller.getWinner().getTotalScore() + " POINTS ");
-        dialog.showAndWait();
+        dialog.show();
     }
 
     private void playMusic(String filename)
     {
-        String musicFile = "OOO_Part2/yahtzee/resources/" + filename + ".mp3";
+        String musicFile = "resources/" + filename + ".mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setVolume(0.1);
@@ -214,6 +214,7 @@ public class GameScreen implements ScreenObserver
 
         if(controller.isGameOver())
         {
+            System.out.println("test");
             this.dissolve();
             this.showWinner();
             this.playMusic("tyrone");

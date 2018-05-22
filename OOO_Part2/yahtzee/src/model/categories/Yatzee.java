@@ -35,6 +35,9 @@ public class Yatzee implements Category {
     @Override
     public int berekenScore() {
         int firstDice = diceCup.getDices().get(0).getEyes();
+        if(diceCup.getDices().get(0).getEyes()==0){
+            return 0;
+        }
         for(Dice dice : diceCup.getDices()) {
             if(firstDice != dice.getEyes()) return 0;
         }
@@ -43,6 +46,6 @@ public class Yatzee implements Category {
 
     @Override
     public String toString() {
-        return "YATZEE" ;
+        return "Yahtzee" ;
     }
 }
