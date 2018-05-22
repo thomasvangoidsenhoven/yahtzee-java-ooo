@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.CategoryType;
 import model.Dice;
@@ -18,6 +20,7 @@ import model.YahtzeeGame;
 import model.observer.ScreenObserver;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -33,14 +36,14 @@ public class GameScreen implements ScreenObserver
     private ComboBox menuButton;
     private Button endTurnButton;
     private Button rollButton = new Button("role dice!");
+    private Pane root;
 
     public GameScreen(PlayerController controller)
     {
         this.controller = controller;
         this.controller.registerObserver(this);
         startUp();
-
-
+        this.playMusic("startup");
 
     }
 
@@ -49,7 +52,7 @@ public class GameScreen implements ScreenObserver
         //System.out.println("test");
         stage = new Stage();
         stage.setTitle("Yahtzee | " + controller.getPlayerName());
-        VBox root = new VBox();
+        this.root = new VBox();
 
         createGameText(root);
         createGameView(root);
@@ -184,40 +187,70 @@ public class GameScreen implements ScreenObserver
         playerScore.setText(result);
     }
 
+    private void showWinner()
+    {
+        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+        dialog.setContentText("The Winner IS: " + controller.getWinner().getUsername() + "\n WITH " + this.controller.getWinner().getTotalScore() + " POINTS ");
+        dialog.showAndWait();
+    }
 
+    private void playMusic(String filename)
+    {
+        String musicFile = "OOO_Part2/yahtzee/resources/" + filename + ".mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(0.1);
+        mediaPlayer.play();
+    }
+
+    private void dissolve()
+    {
+        this.root.setVisible(false);
+    }
 
     //redraw dices
     @Override
     public void update() {
-        System.out.println("redraw + currently playing: " + this.controller.getCurrentPlayer().getUsername());
-        int i = 0;
-        //create helper methods
-        for(Dice dice : controller.getDices())
+
+        if(controller.isGameOver())
         {
-            buttons.get(i).setText(Integer.toString(dice.getEyes()));
-            if(controller.areYouPlaying())
-            {
-                final int index = i;
-                buttons.get(i).setOnAction((event -> this.lock(index)));
-            }
-            else
-            {
-                buttons.get(i).setOnAction(event -> {});
-            }
-            if(controller.isDiceLocked(i))
-            {
-                this.buttons.get(i).setStyle("-fx-background-color: red");
-            }
-            else
-            {
-                this.buttons.get(i).setStyle("-fx-background-color: green");
-            }
-            i++;
+            this.dissolve();
+            this.showWinner();
+            this.playMusic("tyrone");
         }
-        this.createPlayerText();
-        this.drawCategories();
-        this.drawRollButton();
-        this.displayScores();
+        else
+        {
+            System.out.println("redraw + currently playing: " + this.controller.getCurrentPlayer().getUsername());
+            int i = 0;
+            //create helper methods
+            for(Dice dice : controller.getDices())
+            {
+                buttons.get(i).setText(Integer.toString(dice.getEyes()));
+                if(controller.areYouPlaying())
+                {
+                    final int index = i;
+                    buttons.get(i).setOnAction((event -> this.lock(index)));
+                }
+                else
+                {
+                    buttons.get(i).setOnAction(event -> {});
+                }
+                if(controller.isDiceLocked(i))
+                {
+                    this.buttons.get(i).setStyle("-fx-background-color: red");
+                }
+                else
+                {
+                    this.buttons.get(i).setStyle("-fx-background-color: green");
+                }
+                i++;
+            }
+            this.createPlayerText();
+            this.drawCategories();
+            this.drawRollButton();
+            this.displayScores();
+
+        }
 
     }
 }

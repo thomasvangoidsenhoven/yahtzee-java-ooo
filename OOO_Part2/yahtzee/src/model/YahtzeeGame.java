@@ -9,12 +9,37 @@ public class YahtzeeGame implements YahtzeeSubject
 {
     private PlayerGroup group;
     private DiceRoll diceRoll;
+    private boolean gameOver = false;
 
 
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
         diceRoll = new DiceRoll(3,5);
+    }
+
+    public void endGame()
+    {
+
+    }
+
+    public void restart()
+    {
+        gameOver = true;
+    }
+
+
+    public Player getWinner()
+    {
+        Player winner = null;
+
+        for(Player p : group.getPlayers())
+        {
+            if(winner == null ) winner = p;
+            if(winner != null && winner.getTotalScore() < p.getTotalScore()) winner = p;
+        }
+
+        return winner;
     }
 
 
@@ -24,6 +49,19 @@ public class YahtzeeGame implements YahtzeeSubject
 
     }
 
+
+    public boolean isGameOver()
+    {
+        boolean result = false;
+        int amount = 0;
+        for(Player player : group.getPlayers())
+        {
+            if(player.hasFilledOutAllCategories()) amount++;
+        }
+
+        if(amount == group.getPlayers().size()) return true;
+        return result;
+    }
 
     public Player getCurrentPlayer()
     {
@@ -81,6 +119,8 @@ public class YahtzeeGame implements YahtzeeSubject
 
         Category category = categoryFactory.createCategory(categoryType, diceRoll.getDiceCup());
         group.addCategoryToPlayer(category,username);
+
+
     }
 
     @Override

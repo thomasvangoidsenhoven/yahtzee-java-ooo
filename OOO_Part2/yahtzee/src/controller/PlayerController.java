@@ -33,6 +33,16 @@ public class PlayerController {
         return false;
     }
 
+    public Player getWinner()
+    {
+        return suite.getYahtzeeGame().getWinner();
+    }
+
+    public boolean isGameOver()
+    {
+        return suite.getYahtzeeGame().isGameOver();
+    }
+
     public void registerObserver(ScreenObserver observer)
     {
         suite.registerYahtzeeObserver(observer);

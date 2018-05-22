@@ -44,9 +44,27 @@ public class Player
         return test;
     }
 
+    public boolean hasFilledOutAllCategories()
+    {
+        if (new ArrayList<>(this.catogories.values()).size() == 13) return true;
+        return false;
+    }
+
     public void addCategory(Category category){
         if(catogories.get(category.getCategoryType()) != null) throw new IllegalStateException("Already Used a category")  ;
         catogories.put(category.getCategoryType(),category);
+    }
+
+
+    public int getTotalScore()
+    {
+        int sum = 0;
+        for(Category c : catogories.values())
+        {
+            sum += c.getScore();
+        }
+
+        return sum;
     }
 
     @Override
