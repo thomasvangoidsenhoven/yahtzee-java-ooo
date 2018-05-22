@@ -52,7 +52,12 @@ public class DiceCup {
 
     public void clone(DiceCup diceCup)
     {
-        this.diceList = diceCup.getDices();
+        this.diceList = new ArrayList<>();
+
+        for(Dice dice : diceCup.getDices())
+        {
+            diceList.add(new Dice(dice.getEyes()));
+        }
     }
 
 

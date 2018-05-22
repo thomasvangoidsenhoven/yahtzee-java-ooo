@@ -7,11 +7,6 @@ import java.util.*;
 public class SmallStraight implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.SMALL_STRAIGHT;
-    private int score;
-    @Override
-    public void setScore() {
-        this.score = berekenScore();
-    }
 
     public CategoryType getCategoryType() {
         return type;
@@ -27,13 +22,14 @@ public class SmallStraight implements Category {
         if(diceCup.getDices().isEmpty() || diceCup == null){
             throw new IllegalArgumentException("Dice Collection is empty or does not exist");
         } else {
-            this.diceCup = diceCup;
+            this.diceCup = new DiceCup(5);
+            this.diceCup.clone(diceCup);
         }
     }
 
     @Override
     public int getScore() {
-        return score;
+        return this.berekenScore();
     }
 
 

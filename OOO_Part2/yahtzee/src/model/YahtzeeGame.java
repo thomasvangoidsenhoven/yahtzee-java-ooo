@@ -78,9 +78,8 @@ public class YahtzeeGame implements YahtzeeSubject
 
     private void addCategoryToPlayer(String username, CategoryType categoryType){
         CategoryFactory categoryFactory = new CategoryFactory();
-        //TODO should category know the DiceCup object or just a list of dices?
+
         Category category = categoryFactory.createCategory(categoryType, diceRoll.getDiceCup());
-        category.setScore();
         group.addCategoryToPlayer(category,username);
     }
 

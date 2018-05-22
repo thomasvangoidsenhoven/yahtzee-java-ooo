@@ -7,14 +7,10 @@ import java.util.*;
 public class LargeStraight implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.LARGE_STRAIGHT;
-    private int score;
-    @Override
-    public void setScore() {
-        this.score = berekenScore();
-    }
+
     @Override
     public int getScore() {
-        return score;
+        return this.berekenScore();
     }
     public CategoryType getCategoryType() {
         return type;
@@ -30,7 +26,8 @@ public class LargeStraight implements Category {
         if(diceCup.getDices().isEmpty() || diceCup == null){
             throw new IllegalArgumentException("Dice Collection is empty or does not exist");
         } else {
-            this.diceCup = diceCup;
+            this.diceCup = new DiceCup(5);
+            this.diceCup.clone(diceCup);
         }
     }
 
