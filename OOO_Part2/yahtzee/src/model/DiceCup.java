@@ -50,6 +50,10 @@ public class DiceCup {
         return test;
     }
 
+    public void clone(DiceCup diceCup)
+    {
+        this.diceList = diceCup.getDices();
+    }
 
 
 }

@@ -9,10 +9,6 @@ public class FullHouse implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.FULL_HOUSE;
     private int score;
-    @Override
-    public void setScore() {
-        this.score = berekenScore();
-    }
 
     @Override
     public int getScore() {

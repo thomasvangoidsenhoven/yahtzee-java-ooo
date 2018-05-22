@@ -5,15 +5,11 @@ import model.*;
 public class Chance implements Category {
     private DiceCup diceCup;
     private CategoryType type = CategoryType.CHANCE;
-    private int score;
-    @Override
-    public void setScore() {
-        this.score = berekenScore();
-    }
+
 
     @Override
     public int getScore() {
-        return score;
+        return this.berekenScore();
     }
 
     public CategoryType getCategoryType() {
@@ -22,7 +18,6 @@ public class Chance implements Category {
 
     public Chance(DiceCup diceCup){
         setDiceCup(diceCup);
-
     }
 
 
@@ -33,7 +28,8 @@ public class Chance implements Category {
         if(diceCup.getDices().isEmpty() || diceCup == null){
             throw new IllegalArgumentException("Dice Collection is empty or does not exist");
         } else {
-            this.diceCup = diceCup;
+            this.diceCup = new DiceCup(5);
+            this.diceCup.clone(diceCup);
         }
     }
 
