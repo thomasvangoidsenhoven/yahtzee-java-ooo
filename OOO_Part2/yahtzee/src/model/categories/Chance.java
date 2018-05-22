@@ -43,6 +43,8 @@ public class Chance implements Category {
         return result;
     }
 
+
+
     @Override
     public String toString() {
         return "CHANCE";

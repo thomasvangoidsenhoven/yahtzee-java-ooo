@@ -17,6 +17,7 @@ import model.DiceCup;
 import model.YahtzeeGame;
 import model.observer.ScreenObserver;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -158,10 +159,18 @@ public class GameScreen implements ScreenObserver
         System.out.println(list.getValue());
         if(list.getValue() != null)
         {
-            System.out.println("-- END TURN --");
-            controller.chooseCategory(controller.getPlayerName(),(CategoryType) list.getValue());
-            controller.resetDices();
-            controller.goNextPlayer();
+            try
+            {
+                controller.chooseCategory(controller.getPlayerName(),(CategoryType) list.getValue());
+                System.out.println("-- END TURN --");
+                controller.resetDices();
+                controller.goNextPlayer();
+            }catch (IllegalStateException e)
+            {
+                JOptionPane.showMessageDialog(null,"category is already used");
+            }
+
+
         }
 
 

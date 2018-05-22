@@ -45,6 +45,7 @@ public class Player
     }
 
     public void addCategory(Category category){
+        if(catogories.get(category.getCategoryType()) != null) throw new IllegalStateException("Already Used a category")  ;
         catogories.put(category.getCategoryType(),category);
     }
 
