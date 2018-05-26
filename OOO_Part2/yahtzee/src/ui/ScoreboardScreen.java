@@ -25,12 +25,14 @@ public class ScoreboardScreen implements ScreenObserver {
     private PlayerController controller;
     private Stage stage;
     private GridPane root;
+    private List<Player> playerList= new ArrayList<>();
 
 
     public ScoreboardScreen(PlayerController controller){
         this.controller = controller;
         this.controller.registerObserver(this);
         this.controller.initScoreboard();
+        playerList = controller.getPlayers();
         initDraw();
     }
 
@@ -77,7 +79,7 @@ public class ScoreboardScreen implements ScreenObserver {
 
     @Override
     public void update() {
-        List<Player> playerList = controller.getPlayers();
+
         List<CategoryType> categoryTypes = new ArrayList<>(Arrays.asList(CategoryType.values()));
 
 
@@ -85,9 +87,15 @@ public class ScoreboardScreen implements ScreenObserver {
         {
             for(int column = 1; column <= playerList.size();column++)
             {
+                int searchdex = column-1;
+                Player currentPlayer = playerList.get(searchdex);
+
                 if(playerList.get(column-1).getCategoryByType(categoryTypes.get(row-1)) != null)
                 {
-                    root.add(new Label(Integer.toString(playerList.get(column-1).getCategoryByType(categoryTypes.get(row-1)).getScore())),column,row);
+                    int categoryScore = currentPlayer.getCategoryByType(categoryTypes.get(row-1)).getScore();
+                    Label label = new Label(Integer.toString(categoryScore));
+
+                    root.add(label,column,row);
                 }
             }
         }
