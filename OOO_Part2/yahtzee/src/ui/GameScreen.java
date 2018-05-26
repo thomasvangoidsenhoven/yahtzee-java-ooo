@@ -43,13 +43,13 @@ public class GameScreen implements ScreenObserver
         this.controller = controller;
         this.controller.registerObserver(this);
         startUp();
-        new ScoreboardScreen(controller);
+
         this.playMusic("startup");
     }
 
     private void startUp()
     {
-        //System.out.println("test");
+
         stage = new Stage();
         stage.setTitle("Yahtzee | " + controller.getPlayerName());
         this.root = new VBox();

@@ -1,20 +1,30 @@
 package ui;
 
 import controller.PlayerController;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Category;
+import model.CategoryType;
 import model.Player;
 import model.observer.ScreenObserver;
 import model.singleton.Scoreboard;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class ScoreboardScreen implements ScreenObserver {
     private PlayerController controller;
     private Stage stage;
-    private Pane root;
+    private GridPane root;
 
 
     public ScoreboardScreen(PlayerController controller){
@@ -25,21 +35,64 @@ public class ScoreboardScreen implements ScreenObserver {
     }
 
     public void initDraw(){
-        //System.out.println("test");
         stage = new Stage();
         stage.setTitle("Scoreboard");
         this.root = new GridPane();
+        root.add(new Label("Scoreboard"),0,0);
+
+        int columnNumber=1;
+        int rowNumber = 1;
         for (Player p: controller.getSuite().getPlayers()) {
             Label l = new Label(p.getUsername());
-            root.getChildren().add(l);
+            root.add(l,columnNumber,0);
+            ColumnConstraints constraints = new ColumnConstraints();
+            constraints.setMinWidth(100);
+            root.getColumnConstraints().add(constraints);
+            columnNumber++;
+
         }
-        stage.setScene(new Scene(root, 300, 250));
+
+        for(CategoryType categoryType : CategoryType.values())
+        {
+            root.add(new Label(categoryType.getName()),0,rowNumber);
+            rowNumber++;
+        }
+        stage.setScene(new Scene(root, (columnNumber+1)*75, 666));
         stage.show();
     }
 
+    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
 
     @Override
     public void update() {
+        List<Player> playerList = controller.getPlayers();
+        List<CategoryType> categoryTypes = new ArrayList<>(Arrays.asList(CategoryType.values()));
+
+
+        for(int row = 1; row <= categoryTypes.size();row++)
+        {
+            for(int column = 1; column <= playerList.size();column++)
+            {
+                if(playerList.get(column-1).getCategoryByType(categoryTypes.get(row-1)) != null)
+                {
+                    root.add(new Label(Integer.toString(playerList.get(column-1).getCategoryByType(categoryTypes.get(row-1)).getScore())),column,row);
+                }
+            }
+        }
+
+
         //redraw
     }
 }

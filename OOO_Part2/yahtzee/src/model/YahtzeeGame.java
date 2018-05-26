@@ -30,6 +30,10 @@ public class YahtzeeGame implements YahtzeeSubject
         return this.scoreboard.getInfo();
     }
 
+    public List<Player> getPlayers(){
+        return group.getPlayers();
+    }
+
     public void endGame()
     {
 

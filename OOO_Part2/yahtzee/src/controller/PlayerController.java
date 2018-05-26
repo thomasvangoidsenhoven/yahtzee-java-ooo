@@ -66,6 +66,11 @@ public class PlayerController {
         suite.getYahtzeeGame().play(playerId, category);
     }
 
+    public List<Player> getPlayers()
+    {
+        return suite.getPlayers();
+    }
+
     //player who's currently playing
     public Player getCurrentPlayer()
     {

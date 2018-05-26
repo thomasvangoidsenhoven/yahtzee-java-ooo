@@ -3,6 +3,7 @@ package controller;
 import javafx.scene.control.TextInputDialog;
 import model.GameSuite;
 import model.Player;
+import ui.ScoreboardScreen;
 
 import java.util.Optional;
 
@@ -49,11 +50,14 @@ public class MainController {
 
     private void createPlayerControllers(GameSuite suite)
     {
+        PlayerController playerController = null;
         //for each Player a PlayerController
         for(Player p : suite.getPlayers())
         {
-            new PlayerController(p,suite);
+            playerController = new PlayerController(p,suite);
         }
+        new ScoreboardScreen(playerController);
+
     }
 
 }
