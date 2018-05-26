@@ -39,7 +39,7 @@ public class FourOfAKind implements Category {
     public int berekenScore() {
         List<Integer> values = new ArrayList<>();
         int points =0;
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             values.add(dice.getEyes());
             points += dice.getEyes();
         }

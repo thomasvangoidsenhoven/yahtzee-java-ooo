@@ -6,10 +6,12 @@ import model.GameSuite;
 
 import model.Player;
 import model.observer.ScreenObserver;
+import model.singleton.Scoreboard;
 import ui.GameScreen;
 import ui.ScoreboardScreen;
 
 import java.util.List;
+import java.util.Map;
 
 public class PlayerController {
     private Player yourPlayer;
@@ -25,6 +27,17 @@ public class PlayerController {
 
 
     }
+
+    public void initScoreboard()
+    {
+        suite.getYahtzeeGame().initScoreboard();
+    }
+
+    public Map<Player,List> getScoreboardInfo()
+    {
+        return suite.getYahtzeeGame().getScoreboardInfo();
+    }
+
 
     //is het jou beurt?
     public boolean areYouPlaying()
@@ -96,7 +109,7 @@ public class PlayerController {
         suite.getYahtzeeGame().lock(dice);
     }
 
-    public List<Dice> getDices(){
+    public List<Integer> getDices(){
         return suite.getYahtzeeGame().getDiceCup();
     }
 

@@ -11,34 +11,27 @@ import java.util.Map;
 public class Scoreboard {
 
     private static volatile Scoreboard scoreboard;
-    private PlayerController controller;
+    private PlayerGroup playerGroup;
 
-    private Scoreboard(PlayerController controller){
-        setController(controller);
+    private Scoreboard(PlayerGroup playerGroup){
+        this.playerGroup = playerGroup;
     }
 
-    public static Scoreboard getInstance(PlayerController controller){
+    public static Scoreboard getInstance(PlayerGroup group){
          if(scoreboard == null){
              synchronized (Scoreboard.class){
                  if(scoreboard == null){
-                     scoreboard = new Scoreboard(controller);
+                     scoreboard = new Scoreboard(group);
                  }
              }
          }
          return scoreboard;
     }
 
-    private void setController(PlayerController controller){
-        if(controller == null){
-            throw new IllegalArgumentException("Controller is empty");
-        } else{
-            this.controller = controller;
-        }
-    }
 
     public Map getInfo(){
         Map<Player, List> playersAndScores = new HashMap<>();
-        for (Player p: controller.getSuite().getPlayers()) {
+        for (Player p: playerGroup.getPlayers()) {
             playersAndScores.put(p, p.getCatogories());
         }
         return playersAndScores;

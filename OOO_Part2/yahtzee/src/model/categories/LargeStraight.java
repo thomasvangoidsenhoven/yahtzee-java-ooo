@@ -35,7 +35,7 @@ public class LargeStraight implements Category {
     public int berekenScore() {
         List<Integer> values = new ArrayList<>();
 
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             values.add(dice.getEyes());
         }
         if(values.contains(2) && values.contains(3) && values.contains(4) && values.contains(5) && ((values.contains(1) || values.contains(6)) ) ){

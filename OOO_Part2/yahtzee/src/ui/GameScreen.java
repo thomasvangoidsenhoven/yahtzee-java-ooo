@@ -43,6 +43,7 @@ public class GameScreen implements ScreenObserver
         this.controller = controller;
         this.controller.registerObserver(this);
         startUp();
+        new ScoreboardScreen(controller);
         this.playMusic("startup");
     }
 
@@ -196,7 +197,7 @@ public class GameScreen implements ScreenObserver
 
     private void playMusic(String filename)
     {
-        String musicFile = "resources/" + filename + ".mp3";
+        String musicFile = "OOO_Part2/yahtzee/resources/" + filename + ".mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setVolume(0.1);
@@ -222,11 +223,14 @@ public class GameScreen implements ScreenObserver
         else
         {
             System.out.println("redraw + currently playing: " + this.controller.getCurrentPlayer().getUsername());
-            int i = 0;
+
             //create helper methods
-            for(Dice dice : controller.getDices())
+
+
+
+            for(int i = 0; i < controller.getDices().size(); i++ )
             {
-                buttons.get(i).setText(Integer.toString(dice.getEyes()));
+                buttons.get(i).setText(Integer.toString(controller.getDices().get(i)));
                 if(controller.areYouPlaying())
                 {
                     final int index = i;
@@ -244,8 +248,10 @@ public class GameScreen implements ScreenObserver
                 {
                     this.buttons.get(i).setStyle("-fx-background-color: green");
                 }
-                i++;
             }
+
+
+
             this.createPlayerText();
             this.drawCategories();
             this.drawRollButton();

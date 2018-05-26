@@ -31,10 +31,10 @@ public class DiceRoll {
         return diceCup;
     }
 
-    public List<Dice> getDiceCupAsList()
+    public DiceCup getDiceCupAsList()
     {
 
-        return this.diceCup.getDices();
+        return this.diceCup;
     }
 
     public boolean isDiceLockedOnIndex(int index)

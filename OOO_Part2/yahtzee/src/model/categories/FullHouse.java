@@ -37,7 +37,7 @@ public class FullHouse implements Category {
     public int berekenScore() {
         List<Integer> values = new ArrayList<>();
 
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             values.add(dice.getEyes());
         }
         int number1 = values.get(0);

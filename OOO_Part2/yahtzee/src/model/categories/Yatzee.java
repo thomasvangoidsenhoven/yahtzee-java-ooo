@@ -34,11 +34,11 @@ public class Yatzee implements Category {
 
     @Override
     public int berekenScore() {
-        int firstDice = diceCup.getDices().get(0).getEyes();
-        if(diceCup.getDices().get(0).getEyes()==0){
+        int firstDice = diceCup.getDiceList().get(0).getEyes();
+        if(diceCup.getDiceList().get(0).getEyes()==0){
             return 0;
         }
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             if(firstDice != dice.getEyes()) return 0;
         }
         return 50;

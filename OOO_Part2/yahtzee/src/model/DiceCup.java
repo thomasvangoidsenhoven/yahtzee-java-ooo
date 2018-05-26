@@ -34,11 +34,22 @@ public class DiceCup {
 
     public Dice getDiceOnIndex(int index)
     {
-        return this.getDices().get(index);
+        return diceList.get(index);
     }
 
-    public List<Dice> getDices() {
-        return diceList;
+    public List<Integer> getDices() {
+        List<Integer> integers = new ArrayList<>();
+
+        for(Dice dice : diceList)
+        {
+            integers.add(dice.getEyes());
+        }
+        return integers;
+    }
+
+    public List<Dice> getDiceList()
+    {
+        return this.diceList;
     }
 
     public String toString(){
@@ -54,7 +65,7 @@ public class DiceCup {
     {
         this.diceList = new ArrayList<>();
 
-        for(Dice dice : diceCup.getDices())
+        for(Dice dice : diceCup.getDiceList())
         {
             diceList.add(new Dice(dice.getEyes()));
         }

@@ -2,20 +2,32 @@ package model;
 
 import model.observer.ScreenObserver;
 import model.observer.YahtzeeSubject;
+import model.singleton.Scoreboard;
 
 import java.util.List;
+import java.util.Map;
 
 public class YahtzeeGame implements YahtzeeSubject
 {
     private PlayerGroup group;
     private DiceRoll diceRoll;
-    private boolean gameOver = false;
+    private Scoreboard scoreboard;
 
 
     public YahtzeeGame(PlayerGroup group)
     {
         this.group = group;
         diceRoll = new DiceRoll(3,5);
+    }
+
+    public void initScoreboard()
+    {
+        this.scoreboard = Scoreboard.getInstance(group);
+    }
+
+    public Map<Player,List> getScoreboardInfo()
+    {
+        return this.scoreboard.getInfo();
     }
 
     public void endGame()
@@ -25,7 +37,7 @@ public class YahtzeeGame implements YahtzeeSubject
 
     public void restart()
     {
-        gameOver = true;
+
     }
 
 
@@ -110,8 +122,8 @@ public class YahtzeeGame implements YahtzeeSubject
         return group.getPlayer(playerId).getCategoryByType(categoryType).berekenScore();
     }
 
-    public List<Dice> getDiceCup() {
-        return diceRoll.getDiceCupAsList();
+    public List<Integer> getDiceCup() {
+        return diceRoll.getDiceCup().getDices();
     }
 
     private void addCategoryToPlayer(String username, CategoryType categoryType){

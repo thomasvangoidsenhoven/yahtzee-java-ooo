@@ -37,7 +37,7 @@ public class Chance implements Category {
     @Override
     public int berekenScore() {
         int result=0;
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             result += dice.getEyes();
         }
         return result;

@@ -64,7 +64,7 @@ public class NumberCombos implements Category {
     @Override
     public int berekenScore() {
         int result = 0;
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             if(dice.getEyes() == this.number){
                 result += this.number;
             }

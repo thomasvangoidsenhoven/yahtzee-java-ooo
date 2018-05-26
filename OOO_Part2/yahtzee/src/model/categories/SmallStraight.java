@@ -37,7 +37,7 @@ public class SmallStraight implements Category {
     public int berekenScore() {
         List<Integer> values = new ArrayList<>();
         Set<Integer> duplicates = new HashSet<>();
-        for(Dice dice : diceCup.getDices()) {
+        for(Dice dice : diceCup.getDiceList()) {
             values.add(dice.getEyes());
         }
 

@@ -15,10 +15,13 @@ public class ScoreboardScreen implements ScreenObserver {
     private PlayerController controller;
     private Stage stage;
     private Pane root;
-    private Scoreboard scoreboard = Scoreboard.getInstance(controller);
+
 
     public ScoreboardScreen(PlayerController controller){
+        this.controller = controller;
         this.controller.registerObserver(this);
+        this.controller.initScoreboard();
+        initDraw();
     }
 
     public void initDraw(){
