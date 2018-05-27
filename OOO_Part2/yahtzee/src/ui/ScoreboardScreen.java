@@ -59,7 +59,7 @@ public class ScoreboardScreen implements ScreenObserver {
             root.add(new Label(categoryType.getName()),0,rowNumber);
             rowNumber++;
         }
-        stage.setScene(new Scene(root, (columnNumber+1)*75, 666));
+        stage.setScene(new Scene(root, (columnNumber+1)*75, 400));
         stage.show();
     }
 
