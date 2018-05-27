@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="ooo-part-2-ooo_vt_4:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ooo_part_2_ooo_vt_4_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ooo-part-2-ooo_vt_4.jar">
+        <element id="module-output" name="ooo-part-2-ooo_vt_4" />
+      </element>
+      <element id="directory" name="resources">
+        <element id="dir-copy" path="$PROJECT_DIR$/OOO_Part2/yahtzee/src/resources" />
+      </element>
+    </root>
+  </artifact>
+</component>

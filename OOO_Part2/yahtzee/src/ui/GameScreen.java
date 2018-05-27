@@ -225,6 +225,8 @@ public class GameScreen implements ScreenObserver
     {
         //OOO_Part2/yahtzee/
         String musicFile = "resources/" + filename + ".mp3";
+
+
         try
         {
             Media sound = new Media(new File(musicFile).toURI().toString());
@@ -233,7 +235,9 @@ public class GameScreen implements ScreenObserver
             mediaPlayer.play();
         }catch (Exception e)
         {
-
+            Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+            dialog.setContentText("music not found");
+            dialog.show();
         }
 
     }
