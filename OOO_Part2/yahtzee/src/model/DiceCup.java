@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DomainException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,14 +10,15 @@ public class DiceCup {
 
     //yatzee uses 5 dices
     public DiceCup(int dices) {
+        if(dices < 1) throw new DomainException("number of dice cannot be empty");
         diceList = new ArrayList<>();
         for (int i = 0; i < dices; i++) {
             diceList.add(new Dice());
         }
     }
 
-    //TESPURPOSE CONSTRUCTOR
     public DiceCup(List<Dice> dices) {
+        if(dices == null) throw new DomainException("dices cannot be null");
         diceList = dices;
     }
 

@@ -25,7 +25,7 @@ public class ScoreboardScreen implements ScreenObserver {
     private PlayerController controller;
     private Stage stage;
     private GridPane root;
-    private List<Player> playerList= new ArrayList<>();
+    private List<Player> playerList;
 
 
     public ScoreboardScreen(PlayerController controller){
@@ -63,20 +63,6 @@ public class ScoreboardScreen implements ScreenObserver {
         stage.show();
     }
 
-    public Node getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
-        Node result = null;
-        ObservableList<Node> childrens = gridPane.getChildren();
-
-        for (Node node : childrens) {
-            if(gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-                result = node;
-                break;
-            }
-        }
-
-        return result;
-    }
-
     @Override
     public void update() {
 
@@ -89,10 +75,11 @@ public class ScoreboardScreen implements ScreenObserver {
             {
                 int searchdex = column-1;
                 Player currentPlayer = playerList.get(searchdex);
-
-                if(playerList.get(column-1).getCategoryByType(categoryTypes.get(row-1)) != null)
+                CategoryType categoryType = categoryTypes.get(row-1);
+                if(currentPlayer.getCategoryByType(categoryType) != null)
                 {
-                    int categoryScore = currentPlayer.getCategoryByType(categoryTypes.get(row-1)).getScore();
+
+                    int categoryScore = currentPlayer.getCategoryByType(categoryType).getScore();
                     Label label = new Label(Integer.toString(categoryScore));
 
                     root.add(label,column,row);
