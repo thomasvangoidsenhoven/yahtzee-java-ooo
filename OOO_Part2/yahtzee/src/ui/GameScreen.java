@@ -212,7 +212,8 @@ public class GameScreen implements ScreenObserver
 
     private void playMusic(String filename)
     {
-        String musicFile = "OOO_Part2/yahtzee/resources/" + filename + ".mp3";
+        //OOO_Part2/yahtzee/
+        String musicFile = "resources/" + filename + ".mp3";
         try
         {
             Media sound = new Media(new File(musicFile).toURI().toString());

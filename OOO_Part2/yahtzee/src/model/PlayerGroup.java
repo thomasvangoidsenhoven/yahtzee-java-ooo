@@ -1,6 +1,8 @@
 package model;
 
 
+import exceptions.DomainException;
+
 import java.util.*;
 
 public class PlayerGroup
@@ -14,7 +16,7 @@ public class PlayerGroup
     {
         if(queue.contains(player))
         {
-            System.out.println("elaba wa doe ge nu");
+            throw new DomainException("This player already exists");
         }
         else
         {

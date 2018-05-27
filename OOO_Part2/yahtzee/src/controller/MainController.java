@@ -1,5 +1,7 @@
 package controller;
 
+import exceptions.DomainException;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import model.GameSuite;
 import model.Player;
@@ -32,7 +34,15 @@ public class MainController {
             if(result.isPresent())
             {
                 //ok
-                gameSuite.createPlayer(result.get());
+                try{
+                    gameSuite.createPlayer(result.get());
+                } catch (DomainException e){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
             }else
             {
                 //dialogue got cancelled

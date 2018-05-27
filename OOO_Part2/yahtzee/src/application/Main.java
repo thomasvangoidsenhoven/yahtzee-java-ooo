@@ -1,7 +1,9 @@
 package application;
 	
 import controller.MainController;
+import exceptions.DomainException;
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -13,7 +15,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		MainController controller = new MainController();
 		controller.start();
-
 	}
 	
 	public static void main(String[] args) {
