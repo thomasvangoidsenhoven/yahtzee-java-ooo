@@ -35,6 +35,11 @@ public class Player
         this.username = username;
     }
 
+    public void reestCategories()
+    {
+        catogories = new HashMap<>();
+    }
+
     public List<Category> getCatogories() {
         return new ArrayList<>(catogories.values());
     }
