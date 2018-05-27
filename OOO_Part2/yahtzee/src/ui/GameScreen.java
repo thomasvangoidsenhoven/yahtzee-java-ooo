@@ -2,6 +2,7 @@ package ui;
 
 import com.sun.deploy.uitoolkit.impl.fx.ui.FXMessageDialog;
 import controller.PlayerController;
+import exceptions.DomainException;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -132,7 +133,18 @@ public class GameScreen implements ScreenObserver
 
     private void roll()
     {
-        controller.roll();
+        try
+        {
+            controller.roll();
+        }catch (DomainException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("no more chances");
+            alert.showAndWait();
+        }
+
     }
 
     private void lock(int index){
@@ -170,10 +182,12 @@ public class GameScreen implements ScreenObserver
                     controller.resetDices();
                     controller.goNextPlayer();
                 }
-            }catch (IllegalStateException e)
+
+            }catch (DomainException e)
             {
                 JOptionPane.showMessageDialog(null,"category is already used");
             }
+
 
 
         }
