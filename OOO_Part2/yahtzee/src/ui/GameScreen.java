@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.FXMessageDialog;
 import controller.PlayerController;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -198,10 +199,22 @@ public class GameScreen implements ScreenObserver
     private void playMusic(String filename)
     {
         String musicFile = "OOO_Part2/yahtzee/resources/" + filename + ".mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setVolume(0.1);
-        mediaPlayer.play();
+        try
+        {
+            Media sound = new Media(new File(musicFile).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.setVolume(0.1);
+            mediaPlayer.play();
+        }catch (Exception e)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Music file not found, make sure to put git root must be the same as project root");
+
+            alert.showAndWait();
+        }
+
     }
 
     private void dissolve()
@@ -215,7 +228,6 @@ public class GameScreen implements ScreenObserver
 
         if(controller.isGameOver())
         {
-            System.out.println("test");
             this.dissolve();
             this.showWinner();
             this.playMusic("tyrone");
