@@ -1,6 +1,7 @@
 package model.singleton;
 
 import controller.PlayerController;
+import exceptions.DomainException;
 import model.Player;
 import model.PlayerGroup;
 
@@ -14,6 +15,7 @@ public class Scoreboard {
     private PlayerGroup playerGroup;
 
     private Scoreboard(PlayerGroup playerGroup){
+        if(playerGroup == null) throw new DomainException("playergroup cannot be null");
         this.playerGroup = playerGroup;
     }
 

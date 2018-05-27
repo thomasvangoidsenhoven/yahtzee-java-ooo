@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DomainException;
 import model.observer.ScreenObserver;
 import model.observer.YahtzeeSubject;
 import model.singleton.Scoreboard;
@@ -16,6 +17,7 @@ public class YahtzeeGame implements YahtzeeSubject
 
     public YahtzeeGame(PlayerGroup group)
     {
+        if(group == null) throw new DomainException("group is null");
         this.group = group;
         diceRoll = new DiceRoll(3,5);
     }
@@ -68,7 +70,6 @@ public class YahtzeeGame implements YahtzeeSubject
 
     public boolean isGameOver()
     {
-        boolean result = false;
         int amount = 0;
         for(Player player : group.getPlayers())
         {
@@ -76,7 +77,7 @@ public class YahtzeeGame implements YahtzeeSubject
         }
 
         if(amount == group.getPlayers().size()) return true;
-        return result;
+        return false;
     }
 
     public Player getCurrentPlayer()

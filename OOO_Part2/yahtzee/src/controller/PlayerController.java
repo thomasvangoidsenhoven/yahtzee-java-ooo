@@ -118,8 +118,5 @@ public class PlayerController {
         return suite.getYahtzeeGame().getDiceCup();
     }
 
-    public void createScoreboard(){
-
-    }
 
 }

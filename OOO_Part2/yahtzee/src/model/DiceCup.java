@@ -37,6 +37,7 @@ public class DiceCup {
 
     public Dice getDiceOnIndex(int index)
     {
+        if(index <0 || index >= this.getDiceList().size()) throw new DomainException("invalid index");
         return diceList.get(index);
     }
 
@@ -66,6 +67,7 @@ public class DiceCup {
 
     public void clone(DiceCup diceCup)
     {
+        if(diceCup == null) throw new DomainException("diceCup cannot be null");
         this.diceList = new ArrayList<>();
 
         for(Dice dice : diceCup.getDiceList())

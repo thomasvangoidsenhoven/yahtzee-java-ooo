@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DomainException;
 import model.observer.ScreenObserver;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class GameSuite
 
     public void createPlayer(String username)
     {
+
         playerGroup.addPlayer(new Player(username));
     }
     public List<Player> getPlayers(){ return  playerGroup.getPlayers(); }

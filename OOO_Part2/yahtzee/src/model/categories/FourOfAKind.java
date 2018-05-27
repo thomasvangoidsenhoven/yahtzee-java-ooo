@@ -1,5 +1,6 @@
 package model.categories;
 
+import exceptions.DomainException;
 import model.*;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class FourOfAKind implements Category {
     @Override
     public void setDiceCup(DiceCup diceCup) {
         if(diceCup.getDices().isEmpty() || diceCup == null){
-            throw new IllegalArgumentException("Dice Collection is empty or does not exist");
+            throw new DomainException("Dice Collection is empty or does not exist");
         } else {
             this.diceCup = new DiceCup(5);
             this.diceCup.clone(diceCup);

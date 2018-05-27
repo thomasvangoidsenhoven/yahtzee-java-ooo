@@ -1,10 +1,12 @@
 package model;
 
+import exceptions.DomainException;
+
 import java.util.List;
 
 //put dicecup in DiceRoll?
 public class DiceRoll {
-    private int amount = 0;
+    private int amount;
     private final int init;
     private DiceCup diceCup;
 
@@ -39,7 +41,7 @@ public class DiceRoll {
 
     public boolean isDiceLockedOnIndex(int index)
     {
-
+        if(index <0 || index >= getDiceCupAsList().getDiceList().size()) throw new DomainException("invalid index argument");
         return this.getDiceOnIndex(index).isLocked();
     }
 
@@ -50,13 +52,13 @@ public class DiceRoll {
 
     private Dice getDiceOnIndex(int index)
     {
-
+        if(index <0 || index >= getDiceCupAsList().getDiceList().size()) throw new DomainException("invalid index argument");
         return diceCup.getDiceOnIndex(index);
     }
 
     public void roll()
     {
-        if(amount == 0) throw new IllegalStateException("nope");
+        if(amount == 0) throw new DomainException("you do not have any more chances");
         diceCup.roll();
         amount--;
         System.out.println("chances: " + amount);

@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DomainException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +31,7 @@ public class Player
 
     public void setUsername(String username)
     {
+        if(username == null || username.isEmpty())throw new DomainException("username is null or empty");
         this.username = username;
     }
 

@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DomainException;
 import model.categories.*;
 
 public class CategoryFactory
@@ -16,6 +17,7 @@ public class CategoryFactory
 
     public Category createCategory(CategoryType categoryType, DiceCup diceCup)
     {
+        if(categoryType == null || diceCup == null || diceCup.getDiceList().isEmpty()) throw new DomainException();
 
         Category category = null;
 

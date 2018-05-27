@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DomainException;
+
 import java.util.Random;
 
 public class Dice {
@@ -10,8 +12,8 @@ public class Dice {
 
     }
 
-    //TESTPURPOSE CONSTRUCTOR
     public Dice(int eyes){
+        if(eyes < 1 || eyes > 6)throw new DomainException("eyes cannot be greater than 6 and smaller than 1");
         this.eyes = eyes;
     }
 
