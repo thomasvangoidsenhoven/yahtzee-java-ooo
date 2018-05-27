@@ -235,9 +235,7 @@ public class GameScreen implements ScreenObserver
             mediaPlayer.play();
         }catch (Exception e)
         {
-            Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
-            dialog.setContentText("music not found");
-            dialog.show();
+
         }
 
     }
