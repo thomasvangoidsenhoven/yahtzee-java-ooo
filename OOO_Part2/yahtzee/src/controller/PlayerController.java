@@ -28,6 +28,16 @@ public class PlayerController {
 
     }
 
+    public void madeReplayChoice()
+    {
+        this.suite.getYahtzeeGame().madeReplayChoice(yourPlayer);
+    }
+
+    public void resetCategoriesForPlayer()
+    {
+        this.suite.getYahtzeeGame().resetCategoriesFromPlayer(yourPlayer);
+    }
+
     public void initScoreboard()
     {
         suite.getYahtzeeGame().initScoreboard();
@@ -44,6 +54,16 @@ public class PlayerController {
     {
         if(getCurrentPlayer().equals(yourPlayer)) return true;
         return false;
+    }
+
+    public void resetAllPlayerCategories()
+    {
+        this.suite.getYahtzeeGame().resetPlayerCategories();
+    }
+
+    public void removePlayerFromPlayerGroup()
+    {
+        this.suite.getYahtzeeGame().removePlayerFromGroup(getCurrentPlayer());
     }
 
     public Player getWinner()

@@ -61,7 +61,6 @@ public class DiceRoll {
         if(amount == 0) throw new DomainException("you do not have any more chances");
         diceCup.roll();
         amount--;
-        System.out.println("chances: " + amount);
     }
 
     public boolean isOnEndOfTurn()

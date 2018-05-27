@@ -12,11 +12,9 @@ public class GameSuite
 
     public void createPlayer(String username)
     {
-        try{
-            playerGroup.addPlayer(new Player(username));
-        } catch (DomainException e){
-            throw new DomainException(e.getMessage());
-        }
+
+        playerGroup.addPlayer(new Player(username));
+
 
     }
     public List<Player> getPlayers(){ return  playerGroup.getPlayers(); }

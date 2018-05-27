@@ -10,8 +10,8 @@ import java.util.Map;
 public class Player
 {
     private String username;
+    private boolean madeReplayChoice = false;
 
-    //TODO maybe new collection type needed
     private Map<CategoryType,Category> catogories = new HashMap<>();
 
     public Category getCategoryByType(CategoryType type)
@@ -35,11 +35,24 @@ public class Player
         this.username = username;
     }
 
-    public void reestCategories()
+    public int getScore(CategoryType type)
     {
-        catogories = new HashMap<>();
+        return this.getCategoryByType(type).getScore();
     }
 
+    public void resetCategories()
+    {
+        catogories.clear();
+    }
+
+    public void setMadeReplayChoice(boolean madeReplayChoice) {
+        this.madeReplayChoice = madeReplayChoice;
+    }
+
+    public boolean hasMadeReplayChoice()
+    {
+        return this.madeReplayChoice;
+    }
     public List<Category> getCatogories() {
         return new ArrayList<>(catogories.values());
     }
@@ -59,7 +72,7 @@ public class Player
     }
 
     public void addCategory(Category category){
-        if(catogories.get(category.getCategoryType()) != null) throw new IllegalStateException("Already Used a category")  ;
+        if(catogories.get(category.getCategoryType()) != null) throw new DomainException("Already Used a category")  ;
         catogories.put(category.getCategoryType(),category);
     }
 

@@ -25,6 +25,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Stack;
 
 public class GameScreen implements ScreenObserver
@@ -171,16 +172,15 @@ public class GameScreen implements ScreenObserver
 
     private void endTurn(ComboBox list)
     {
-        System.out.println(list.getValue());
         if(list.getValue() != null)
         {
             try
             {
                 controller.chooseCategory(controller.getPlayerName(),(CategoryType) list.getValue());
-                System.out.println("-- END TURN --");
                 if(!controller.getSuite().getYahtzeeGame().isGameOver()) {
                     controller.resetDices();
                     controller.goNextPlayer();
+                    this.roll();
                 }
 
             }catch (DomainException e)
@@ -205,9 +205,20 @@ public class GameScreen implements ScreenObserver
 
     private void showWinner()
     {
-        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-        dialog.setContentText("The Winner IS: " + controller.getWinner().getUsername() + "\n WITH " + this.controller.getWinner().getTotalScore() + " POINTS ");
-        dialog.show();
+        Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+        dialog.setContentText("The Winner IS: " + controller.getWinner().getUsername() + "\n WITH " + this.controller.getWinner().getTotalScore() + " POINTS " + "\n Do you with to play again?");
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.get() == ButtonType.OK){
+            controller.resetCategoriesForPlayer();
+            this.root.setVisible(true);
+
+        } else {
+            controller.removePlayerFromPlayerGroup();
+            stage.close();
+        }
+
+        controller.madeReplayChoice();
+
     }
 
     private void playMusic(String filename)
@@ -222,12 +233,7 @@ public class GameScreen implements ScreenObserver
             mediaPlayer.play();
         }catch (Exception e)
         {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Music file not found, make sure to put git root must be the same as project root");
 
-            alert.showAndWait();
         }
 
     }
@@ -249,12 +255,7 @@ public class GameScreen implements ScreenObserver
         }
         else
         {
-            System.out.println("redraw + currently playing: " + this.controller.getCurrentPlayer().getUsername());
-
             //create helper methods
-
-
-
             for(int i = 0; i < controller.getDices().size(); i++ )
             {
                 buttons.get(i).setText(Integer.toString(controller.getDices().get(i)));

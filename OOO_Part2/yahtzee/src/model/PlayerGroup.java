@@ -24,6 +24,22 @@ public class PlayerGroup
         }
     }
 
+    public int berekenScore(String username, CategoryType type)
+    {
+        Player player = this.getPlayer(username);
+        return player.getScore(type);
+    }
+
+    public void removePlayerFromGroup(Player player)
+    {
+        if(player == null || !queue.contains(player))throw new DomainException("player is null or not found");
+
+        queue.remove(player);
+
+
+
+    }
+
     public Player getCurrentPlayer()
     {
         return queue.peek();

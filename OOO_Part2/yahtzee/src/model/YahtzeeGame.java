@@ -13,7 +13,7 @@ public class YahtzeeGame implements YahtzeeSubject
     private PlayerGroup group;
     private DiceRoll diceRoll;
     private Scoreboard scoreboard;
-
+    private boolean gameOverLock = false;
 
     public YahtzeeGame(PlayerGroup group)
     {
@@ -27,6 +27,11 @@ public class YahtzeeGame implements YahtzeeSubject
         this.scoreboard = Scoreboard.getInstance(group);
     }
 
+    public void removePlayerFromGroup(Player player)
+    {
+        group.removePlayerFromGroup(player);
+    }
+
     public Map<Player,List> getScoreboardInfo()
     {
         return this.scoreboard.getInfo();
@@ -36,15 +41,19 @@ public class YahtzeeGame implements YahtzeeSubject
         return group.getPlayers();
     }
 
-    public void endGame()
+    public void resetPlayerCategories()
     {
-
+        for(Player player: this.getPlayers())
+        {
+            player.resetCategories();
+        }
     }
 
-    public void restart()
+    public void resetCategoriesFromPlayer(Player player)
     {
-
+        player.resetCategories();
     }
+
 
 
     public Player getWinner()
@@ -67,6 +76,19 @@ public class YahtzeeGame implements YahtzeeSubject
 
     }
 
+    public void madeReplayChoice(Player player)
+    {
+        player.setMadeReplayChoice(true);
+    }
+
+    private boolean didAllPlayersMakeAReplayChoice()
+    {
+        for(Player p : this.getPlayers())
+        {
+            if(p.hasMadeReplayChoice() == false) return false;
+        }
+        return true;
+    }
 
     public boolean isGameOver()
     {
@@ -76,7 +98,17 @@ public class YahtzeeGame implements YahtzeeSubject
             if(player.hasFilledOutAllCategories()) amount++;
         }
 
-        if(amount == group.getPlayers().size()) return true;
+        if(didAllPlayersMakeAReplayChoice() == true)
+        {
+            gameOverLock = false;
+        }
+
+        if(this.gameOverLock || amount == group.getPlayers().size() )
+        {
+            //locks gameover
+            gameOverLock = true;
+            return true;
+        }
         return false;
     }
 
@@ -117,13 +149,12 @@ public class YahtzeeGame implements YahtzeeSubject
     {
         diceRoll.resetChances();
         addCategoryToPlayer(playerId,category);
-        System.out.println(group.getPlayer(playerId).getUsername() + " has categories: " + group.getPlayer(playerId).getScoresAndCategories());
         notifyObservers();
     }
 
     public int getScore(String playerId, CategoryType categoryType)
     {
-        //TODO Principle of Least Knowledge
+
         return group.getPlayer(playerId).getCategoryByType(categoryType).berekenScore();
     }
 
